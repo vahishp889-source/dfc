@@ -380,17 +380,17 @@ const HomePage = () => {
             <h2 className="section-heading mb-3">Why Choose <span className="gradient-text">DFC?</span></h2>
             <p className="section-sub mx-auto text-center">We go above and beyond for every single order</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
             {WHY_US.map(({ emoji, title, desc, color }, i) => (
               <motion.div key={title} initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: i * 0.12 }}
-                className="card-premium rounded-2xl p-7 text-center group hover:-translate-y-2 transition-all duration-300">
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-transform duration-300 group-hover:scale-110 text-3xl"
+                className="card-premium rounded-2xl p-4 sm:p-7 text-center group hover:-translate-y-2 transition-all duration-300">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-5 transition-transform duration-300 group-hover:scale-110 text-2xl sm:text-3xl"
                   style={{ background: `${color}14`, border: `1px solid ${color}30` }}>
                   {emoji}
                 </div>
-                <h3 className="font-bold text-ink-900 text-base mb-2">{title}</h3>
-                <p className="text-ink-500 text-sm leading-relaxed">{desc}</p>
+                <h3 className="font-bold text-ink-900 text-sm sm:text-base mb-2">{title}</h3>
+                <p className="text-ink-500 text-xs sm:text-sm leading-relaxed">{desc}</p>
               </motion.div>
             ))}
           </div>
