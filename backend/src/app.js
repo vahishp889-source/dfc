@@ -13,6 +13,7 @@ const errorHandler = require('./middleware/errorHandler');
 const AppError = require('./utils/AppError');
 
 const app = express();
+app.set('trust proxy', 1); // Trust Render's reverse proxy for real client IPs
 const httpServer = http.createServer(app);
 
 // ── Initialize Socket.IO ──────────────────────────────────────────────────────
@@ -44,7 +45,7 @@ app.use(
 // ── Rate Limiting ─────────────────────────────────────────────────────────────
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 200,
+  max: 1000, // Increased from 200 to 1000 requests per 15 minutes
   message: { success: false, message: 'Too many requests. Please try again later.' },
   standardHeaders: true,
   legacyHeaders: false,
