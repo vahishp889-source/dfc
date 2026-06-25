@@ -380,25 +380,21 @@ const HomePage = () => {
             <h2 className="section-heading mb-3">Why Choose <span className="gradient-text">DFC?</span></h2>
             <p className="section-sub mx-auto text-center">We go above and beyond for every single order</p>
           </div>
-          <div className="flex lg:grid lg:grid-cols-4 gap-4 overflow-x-auto lg:overflow-x-visible pb-5 lg:pb-0 scroll-smooth [&::-webkit-scrollbar]:hidden"
-            style={{
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-              WebkitOverflowScrolling: 'touch'
-            }}>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
             {WHY_US.map(({ emoji, title, desc, color }, i) => (
               <motion.div key={title} initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: i * 0.12 }}
-                className="card-premium rounded-2xl p-5 sm:p-7 text-center group hover:-translate-y-2 transition-all duration-300 flex-shrink-0 w-[260px] sm:w-[280px] lg:w-auto">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-transform duration-300 group-hover:scale-110 text-2xl sm:text-3xl"
+                className="card-premium rounded-2xl p-4 sm:p-7 text-center group hover:-translate-y-2 transition-all duration-300">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-5 transition-transform duration-300 group-hover:scale-110 text-2xl sm:text-3xl"
                   style={{ background: `${color}14`, border: `1px solid ${color}30` }}>
                   {emoji}
                 </div>
-                <h3 className="font-bold text-ink-900 text-sm sm:text-base mb-2">{title}</h3>
+                <h3 className="font-bold text-ink-900 text-sm sm:text-base mb-1.5 sm:mb-2">{title}</h3>
                 <p className="text-ink-500 text-xs sm:text-sm leading-relaxed">{desc}</p>
               </motion.div>
             ))}
           </div>
+        </div>
       </Section>
 
       {/* ── OFFERS ──────────────────────────────────────────────────────── */}
