@@ -248,8 +248,8 @@ const HomePage = () => {
             { emoji: '🍬', label: 'Sweets',   cat: 'Desserts', img: catSweets,   bg: '#f3f9ed', border: 'rgba(91,158,15,0.2)',   accent: '#5b9e0f' },
             { emoji: '🥤', label: 'Drinks',   cat: 'Drinks',   img: catDrinks,   bg: '#f3f9ed', border: 'rgba(91,158,15,0.2)',   accent: '#5b9e0f' },
           ].map(({ emoji, label, cat, img, bg, border, accent }, i) => (
-            <motion.div key={cat} initial={{ opacity: 0, y: 28, scale: 0.88 }} whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.5, ease: 'easeOut' }}>
+            <motion.div key={cat} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ delay: i * 0.05, duration: 0.4, ease: 'easeOut' }}>
               <Link to={`/menu?cat=${cat}`}
                 style={{ background: bg, border: `1.5px solid ${border}` }}
                 className="group flex flex-col items-center rounded-2xl overflow-hidden hover:shadow-soft-lg transition-all duration-300 card-hover text-center">
