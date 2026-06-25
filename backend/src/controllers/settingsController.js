@@ -4,6 +4,7 @@ const Offer = require('../models/Offer');
 const AppError = require('../utils/AppError');
 const catchAsync = require('../utils/catchAsync');
 const { deleteImage } = require('../config/cloudinary');
+const { emitSettingsUpdate } = require('../config/socket');
 
 // ─── Public: Get Settings ─────────────────────────────────────────────────────
 
@@ -68,6 +69,8 @@ exports.updateSettings = catchAsync(async (req, res, next) => {
     { new: true, upsert: true, runValidators: true }
   );
 
+  emitSettingsUpdate(restaurantId);
+
   res.status(200).json({
     success: true,
     message: 'Settings updated',
@@ -100,6 +103,8 @@ exports.updateRestaurant = catchAsync(async (req, res, next) => {
     { new: true, runValidators: true }
   );
 
+  emitSettingsUpdate(req.restaurant._id);
+
   res.status(200).json({
     success: true,
     message: 'Restaurant profile updated',
@@ -118,6 +123,8 @@ exports.toggleOpen = catchAsync(async (req, res, next) => {
   settings.isOpen = !settings.isOpen;
   await settings.save();
 
+  emitSettingsUpdate(restaurantId);
+
   res.status(200).json({
     success: true,
     message: `Restaurant is now ${settings.isOpen ? 'OPEN' : 'CLOSED'}`,
@@ -135,6 +142,8 @@ exports.updateDeliveryAreas = catchAsync(async (req, res, next) => {
     { $set: { deliveryAreas: areas } },
     { new: true, upsert: true }
   );
+
+  emitSettingsUpdate(req.restaurant._id);
 
   res.status(200).json({
     success: true,

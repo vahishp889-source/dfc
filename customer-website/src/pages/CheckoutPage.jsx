@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CheckCircle, Tag, X, ArrowLeft, MapPin, MapPinned, Phone, User, Bike, AlertCircle } from 'lucide-react';
 import useCartStore from '../store/cartStore';
-import { placeOrder, validateCoupon, getSettings } from '../services/api';
+import { placeOrder, validateCoupon } from '../services/api';
+import useSettingsStore from '../store/settingsStore';
 import LocationPicker from '../components/shared/LocationPicker';
 import toast from 'react-hot-toast';
 
@@ -20,13 +21,13 @@ const CheckoutPage = () => {
   const [isPlacing, setIsPlacing] = useState(false);
   const [isValidatingCoupon, setIsValidatingCoupon] = useState(false);
   const [placed, setPlaced] = useState(null);
-  const [isOpen, setIsOpen] = useState(true); // optimistic default
+  const { settings } = useSettingsStore();
 
-  useEffect(() => {
-    getSettings().then((d) => setIsOpen(d.settings?.isOpen ?? true)).catch(() => {});
-  }, []);
-
-  const DELIVERY = coupon?.freeDelivery ? 0 : 40;
+  const isOpen = settings?.isOpen ?? true;
+  const baseCharge = settings?.deliveryCharge ?? 40;
+  const freeAbove  = settings?.freeDeliveryAbove ?? 0;
+  const autoFreeDelivery = freeAbove > 0 && sub >= freeAbove;
+  const DELIVERY = (coupon?.freeDelivery || autoFreeDelivery) ? 0 : baseCharge;
   const discount = coupon?.discount || 0;
   const total = Math.max(0, sub - discount + DELIVERY);
 

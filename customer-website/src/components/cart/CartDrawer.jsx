@@ -3,9 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Plus, Minus, Trash2, ShoppingBag, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import useCartStore from '../../store/cartStore';
+import useSettingsStore from '../../store/settingsStore';
 
 const CartDrawer = () => {
   const { items, isCartOpen, closeCart, updateQty, removeItem, subtotal } = useCartStore();
+  const { settings } = useSettingsStore();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,7 +22,10 @@ const CartDrawer = () => {
   }, [isCartOpen]);
 
   const total = subtotal();
-  const DELIVERY = total > 0 ? 40 : 0;
+  const baseCharge = settings?.deliveryCharge ?? 40;
+  const freeAbove = settings?.freeDeliveryAbove ?? 0;
+  const autoFreeDelivery = freeAbove > 0 && total >= freeAbove;
+  const DELIVERY = (total > 0 && !autoFreeDelivery) ? baseCharge : 0;
 
   const goCheckout = () => { closeCart(); navigate('/checkout'); };
 

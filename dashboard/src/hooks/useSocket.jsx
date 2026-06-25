@@ -22,37 +22,41 @@ const useSocket = () => {
 
   // ── Audio ──────────────────────────────────────────────────────────────────
   const createAlertAudio = useCallback(() => {
-    // Web Audio API bell sound — no external file needed
+    // Web Audio API low-pitch alarm buzzer
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = ctx.createOscillator();
-    const gainNode = ctx.createGain();
+    
+    const playLowBuzz = (startTime, duration) => {
+      // Detune two oscillators at 100Hz and 102Hz for a deep, vibrating alarm effect
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      const gainNode = ctx.createGain();
+      
+      osc1.connect(gainNode);
+      osc2.connect(gainNode);
+      gainNode.connect(ctx.destination);
+      
+      osc1.type = 'sawtooth';
+      osc1.frequency.setValueAtTime(100, startTime);
+      
+      osc2.type = 'sawtooth';
+      osc2.frequency.setValueAtTime(102, startTime);
+      
+      // Volume envelope: smooth rise, hold, and rapid fade
+      gainNode.gain.setValueAtTime(0.001, startTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.25, startTime + 0.05);
+      gainNode.gain.setValueAtTime(0.25, startTime + duration - 0.05);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+      
+      osc1.start(startTime);
+      osc1.stop(startTime + duration);
+      osc2.start(startTime);
+      osc2.stop(startTime + duration);
+    };
 
-    oscillator.connect(gainNode);
-    gainNode.connect(ctx.destination);
-
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(880, ctx.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.3);
-
-    gainNode.gain.setValueAtTime(0.8, ctx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.8);
-
-    oscillator.start(ctx.currentTime);
-    oscillator.stop(ctx.currentTime + 0.8);
-
-    // Second beep
-    setTimeout(() => {
-      const ctx2 = new (window.AudioContext || window.webkitAudioContext)();
-      const osc2 = ctx2.createOscillator();
-      const gain2 = ctx2.createGain();
-      osc2.connect(gain2); gain2.connect(ctx2.destination);
-      osc2.type = 'sine';
-      osc2.frequency.setValueAtTime(1100, ctx2.currentTime);
-      osc2.frequency.exponentialRampToValueAtTime(550, ctx2.currentTime + 0.3);
-      gain2.gain.setValueAtTime(0.8, ctx2.currentTime);
-      gain2.gain.exponentialRampToValueAtTime(0.001, ctx2.currentTime + 0.6);
-      osc2.start(ctx2.currentTime); osc2.stop(ctx2.currentTime + 0.6);
-    }, 400);
+    // Play 3 low-pitched alarm buzzes: "bzz... bzz... bzz..."
+    playLowBuzz(ctx.currentTime, 0.25);
+    playLowBuzz(ctx.currentTime + 0.35, 0.25);
+    playLowBuzz(ctx.currentTime + 0.70, 0.25);
   }, []);
 
   // ── Tab title flash ────────────────────────────────────────────────────────

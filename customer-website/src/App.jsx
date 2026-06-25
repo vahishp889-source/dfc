@@ -6,6 +6,7 @@ import Footer from './components/layout/Footer';
 import CartDrawer from './components/cart/CartDrawer';
 import StickyOrderButton from './components/shared/StickyOrderButton';
 import useNotificationStore from './store/notificationStore';
+import useSettingsStore from './store/settingsStore';
 
 import HomePage from './pages/HomePage';
 import MenuPage from './pages/MenuPage';
@@ -24,12 +25,16 @@ const ScrollToTop = () => {
 const Layout = () => {
   const cartIconRef = useRef(null);
   const checkForUpdates = useNotificationStore((s) => s.checkForUpdates);
+  const loadSettings = useSettingsStore((s) => s.load);
 
   // Expose cart icon ref globally for fly-to-cart
   useEffect(() => {
     const cartEl = document.querySelector('[data-cart-icon]');
     if (cartEl) cartIconRef.current = cartEl;
   }, []);
+
+  // Load settings once — store will poll every 60s so admin changes auto-reflect
+  useEffect(() => { loadSettings(); }, []);
 
   // Check once on load whether the customer has an unseen order cancellation
   useEffect(() => { checkForUpdates(); }, []);

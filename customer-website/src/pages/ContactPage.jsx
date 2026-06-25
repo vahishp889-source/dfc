@@ -1,22 +1,49 @@
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock, Instagram, Facebook, MessageCircle } from 'lucide-react';
-
-const HOURS = [
-  { days: 'Monday – Friday', time: '10:00 AM – 10:00 PM' },
-  { days: 'Saturday',        time: '10:00 AM – 11:00 PM' },
-  { days: 'Sunday',          time: '10:00 AM – 11:00 PM' },
-];
-
-const CONTACT_CARDS = [
-  { icon: Phone, title: 'Call Us', value: '+91 98765 43210', sub: 'Available during business hours',
-    href: 'tel:+919876543210', cta: 'Call Now', grad: 'linear-gradient(135deg, #b91c1c, #d97706)' },
-  { icon: MessageCircle, title: 'WhatsApp', value: '+91 98765 43210', sub: 'Quick responses on WhatsApp',
-    href: 'https://wa.me/919876543210', cta: 'Chat Now', grad: 'linear-gradient(135deg, #166534, #15803d)' },
-  { icon: Mail, title: 'Email Us', value: 'hello@dfcrestaurant.com', sub: 'We reply within 24 hours',
-    href: 'mailto:hello@dfcrestaurant.com', cta: 'Send Email', grad: 'linear-gradient(135deg, #d97706, #fb842f)' },
-];
+import useSettingsStore from '../store/settingsStore';
 
 const ContactPage = () => {
+  const { settings, restaurant } = useSettingsStore();
+
+  const phone = restaurant?.phone || '+91 98765 43210';
+  const email = restaurant?.email || 'hello@dfcrestaurant.com';
+  const whatsapp = settings?.socialLinks?.whatsapp || phone;
+  const isOpen = settings?.isOpen ?? true;
+  const instagramHref = settings?.socialLinks?.instagram || '#';
+  const facebookHref  = settings?.socialLinks?.facebook  || '#';
+
+  const CONTACT_CARDS = [
+    { icon: Phone, title: 'Call Us', value: phone, sub: 'Available during business hours',
+      href: `tel:${phone.replace(/\s/g, '')}`, cta: 'Call Now', grad: 'linear-gradient(135deg, #b91c1c, #d97706)' },
+    { icon: MessageCircle, title: 'WhatsApp', value: whatsapp, sub: 'Quick responses on WhatsApp',
+      href: `https://wa.me/${whatsapp.replace(/[^\d]/g, '')}`, cta: 'Chat Now', grad: 'linear-gradient(135deg, #166534, #15803d)' },
+    { icon: Mail, title: 'Email Us', value: email, sub: 'We reply within 24 hours',
+      href: `mailto:${email}`, cta: 'Send Email', grad: 'linear-gradient(135deg, #d97706, #fb842f)' },
+  ];
+
+  // Build opening hours from settings or fall back to defaults
+  const DAY_GROUPS = [
+    { label: 'Monday – Friday', keys: ['monday','tuesday','wednesday','thursday','friday'] },
+    { label: 'Saturday', keys: ['saturday'] },
+    { label: 'Sunday', keys: ['sunday'] },
+  ];
+  const HOURS = (settings?.openingHours && settings.openingHours.length > 0)
+    ? DAY_GROUPS.map(({ label, keys }) => {
+        const entry = settings.openingHours.find((h) => keys.includes(h.day));
+        if (!entry) return null;
+        if (entry.isClosed) return { days: label, time: 'Closed' };
+        const fmt = (t) => {
+          const [h, m] = t.split(':').map(Number);
+          const ampm = h >= 12 ? 'PM' : 'AM';
+          return `${((h % 12) || 12)}:${String(m).padStart(2,'0')} ${ampm}`;
+        };
+        return { days: label, time: `${fmt(entry.open)} – ${fmt(entry.close)}` };
+      }).filter(Boolean)
+    : [
+        { days: 'Monday – Friday', time: '10:00 AM – 10:00 PM' },
+        { days: 'Saturday', time: '10:00 AM – 11:00 PM' },
+        { days: 'Sunday', time: '10:00 AM – 11:00 PM' },
+      ];
   return (
     <div className="min-h-screen pt-20 pb-24 px-4 bg-cream-50">
       <div className="max-w-6xl mx-auto pt-12">
@@ -85,9 +112,17 @@ const ContactPage = () => {
                   </div>
                 ))}
               </div>
-              <div className="flex items-center gap-2 rounded-xl px-4 py-3" style={{ background: 'rgba(21,128,61,0.08)', border: '1px solid rgba(21,128,61,0.2)' }}>
-                <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#15803d' }} />
-                <span className="text-sm font-semibold" style={{ color: '#15803d' }}>Currently Open</span>
+              <div className="flex items-center gap-2 rounded-xl px-4 py-3"
+                style={{
+                  background: isOpen ? 'rgba(21,128,61,0.08)' : 'rgba(185,28,28,0.08)',
+                  border: `1px solid ${isOpen ? 'rgba(21,128,61,0.2)' : 'rgba(185,28,28,0.2)'}`,
+                }}>
+                <span className="w-2 h-2 rounded-full animate-pulse"
+                  style={{ background: isOpen ? '#15803d' : '#b91c1c' }} />
+                <span className="text-sm font-semibold"
+                  style={{ color: isOpen ? '#15803d' : '#b91c1c' }}>
+                  {isOpen ? 'Currently Open' : 'Currently Closed'}
+                </span>
               </div>
             </div>
 
@@ -96,8 +131,8 @@ const ContactPage = () => {
               <h3 className="font-bold text-ink-900 text-lg mb-4">Follow Us</h3>
               <div className="flex gap-3">
                 {[
-                  { icon: Instagram, label: 'Instagram', href: '#', color: '#b91c1c' },
-                  { icon: Facebook,  label: 'Facebook',  href: '#', color: '#15803d' },
+                  { icon: Instagram, label: 'Instagram', href: instagramHref, color: '#b91c1c' },
+                  { icon: Facebook,  label: 'Facebook',  href: facebookHref,  color: '#15803d' },
                 ].map(({ icon: Icon, label, href, color }) => (
                   <a key={label} href={href} target="_blank" rel="noreferrer"
                     className="flex items-center gap-2 bg-cream-100 border border-ink-900/[0.06] rounded-xl px-4 py-2.5 text-ink-600 text-sm font-medium transition-all hover:text-white"

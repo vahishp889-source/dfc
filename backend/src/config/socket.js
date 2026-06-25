@@ -87,6 +87,14 @@ const emitOrderAssigned = (riderId, order) => {
   io.to(`rider:${riderId}`).emit('order-assigned', order);
 };
 
+/**
+ * Emit settings update to all connected clients for the restaurant
+ */
+const emitSettingsUpdate = (restaurantId) => {
+  if (!io) return;
+  io.to(`restaurant:${restaurantId}`).emit('settings-updated', { restaurantId });
+};
+
 const getIO = () => {
   if (!io) throw new Error('Socket.IO not initialized');
   return io;
@@ -98,5 +106,6 @@ module.exports = {
   emitOrderStatusUpdate,
   emitOrderAcknowledged,
   emitOrderAssigned,
+  emitSettingsUpdate,
   getIO,
 };

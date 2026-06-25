@@ -5,7 +5,8 @@ import {
   ArrowRight, Star, Clock, Bike, ShieldCheck,
   Phone, MapPin, ChevronRight, Flame, Sparkles, Navigation,
 } from 'lucide-react';
-import { getMenu, getOffers, getSettings } from '../services/api';
+import { getMenu, getOffers } from '../services/api';
+import useSettingsStore from '../store/settingsStore';
 import MenuCard from '../components/menu/MenuCard';
 import dfcLogo from '../assets/dfc-logo.png';
 import storefrontPink from '../assets/storefront-pink.jpg';
@@ -102,14 +103,15 @@ const HomePage = () => {
   const cartRef = useRef(null);
   const [featured, setFeatured] = useState([]);
   const [offers, setOffers] = useState([]);
-  const [isOpen, setIsOpen] = useState(null); // null = loading
+
+  const { settings, restaurant } = useSettingsStore();
+  const isOpen = settings?.isOpen ?? null; // null = still loading
 
   useEffect(() => {
     const cartEl = document.querySelector('[data-cart-icon]');
     if (cartEl) cartRef.current = cartEl;
     getMenu().then((d) => setFeatured(d.items.filter((i) => i.isFeatured && i.isAvailable).slice(0, 4))).catch(() => {});
     getOffers().then((d) => setOffers(d.offers.slice(0, 3))).catch(() => {});
-    getSettings().then((d) => setIsOpen(d.settings?.isOpen ?? true)).catch(() => setIsOpen(true));
   }, []);
 
   return (
@@ -531,7 +533,11 @@ const HomePage = () => {
                 No hidden charges, no minimum order surprise.
               </p>
               <div className="grid grid-cols-2 gap-3">
-                {['Tagarapuvalasa', 'Chittivalasa', 'Sangivalasa', 'Bheemunipatnam', 'Anandapuram', 'Junction Area'].map((area) => (
+                {(
+                  settings?.deliveryAreas?.filter((a) => a.isActive).length > 0
+                    ? settings.deliveryAreas.filter((a) => a.isActive).map((a) => a.name)
+                    : ['Tagarapuvalasa', 'Chittivalasa', 'Sangivalasa', 'Bheemunipatnam', 'Anandapuram', 'Junction Area']
+                ).map((area) => (
                   <div key={area} className="flex items-center gap-2 text-sm text-ink-600">
                     <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#b91c1c' }} />
                     {area}
@@ -542,9 +548,26 @@ const HomePage = () => {
             </div>
             <div className="p-10 lg:p-14 flex flex-col justify-center space-y-7 border-t lg:border-t-0 lg:border-l border-ink-900/[0.06]">
               {[
-                { icon: Clock, label: 'Delivery Time',   value: '30–45 minutes', color: '#b91c1c' },
-                { icon: Bike,  label: 'Delivery Charge', value: '₹40 flat (Free above ₹299)', color: '#d97706' },
-                { icon: Phone, label: 'Order Support',   value: '+91 98765 43210', color: '#15803d' },
+                {
+                  icon: Clock, label: 'Delivery Time', color: '#b91c1c',
+                  value: settings?.estimatedDeliveryMins
+                    ? `${settings.estimatedDeliveryMins} minutes`
+                    : '30–45 minutes',
+                },
+                {
+                  icon: Bike, label: 'Delivery Charge', color: '#d97706',
+                  value: settings
+                    ? `₹${settings.deliveryCharge} flat${
+                        settings.freeDeliveryAbove > 0
+                          ? ` (Free above ₹${settings.freeDeliveryAbove})`
+                          : ''
+                      }`
+                    : '₹40 flat',
+                },
+                {
+                  icon: Phone, label: 'Order Support', color: '#15803d',
+                  value: restaurant?.phone || '+91 98765 43210',
+                },
               ].map(({ icon: Icon, label, value, color }) => (
                 <div key={label} className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${color}14`, border: `1px solid ${color}30` }}>

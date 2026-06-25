@@ -1,8 +1,18 @@
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Clock, Instagram, Facebook } from 'lucide-react';
 import dfcLogo from '../../assets/dfc-logo.png';
+import useSettingsStore from '../../store/settingsStore';
 
 const Footer = () => {
+  const { settings, restaurant } = useSettingsStore();
+
+  const phone = restaurant?.phone || '+91 98765 43210';
+  const email = restaurant?.email || 'hello@dfcrestaurant.com';
+  const address = restaurant?.address || 'Tagarapuvalasa, Visakhapatnam, Andhra Pradesh 531162';
+  const isOpen = settings?.isOpen ?? true;
+  const instagramHref = settings?.socialLinks?.instagram || '#';
+  const facebookHref  = settings?.socialLinks?.facebook  || '#';
+
   const getDashboardUrl = () => {
     if (import.meta.env.VITE_DASHBOARD_URL) return import.meta.env.VITE_DASHBOARD_URL;
     if (window.location.hostname.includes('dfc-restaurant') || window.location.hostname.includes('pages.dev')) {
@@ -42,8 +52,8 @@ const Footer = () => {
           </p>
           <div className="flex gap-3">
             {[
-              { href: '#', Icon: Instagram, color: '#b91c1c' },
-              { href: '#', Icon: Facebook,  color: '#15803d' },
+              { href: instagramHref, Icon: Instagram, color: '#b91c1c' },
+              { href: facebookHref,  Icon: Facebook,  color: '#15803d' },
             ].map(({ href, Icon, color }) => (
               <a key={color} href={href}
                 className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 bg-ink-900/[0.04] border border-ink-900/[0.06] hover:shadow-soft"
@@ -75,15 +85,15 @@ const Footer = () => {
           <ul className="space-y-3.5">
             <li className="flex items-start gap-3 text-sm text-ink-600">
               <MapPin size={14} className="mt-0.5 flex-shrink-0" style={{ color: '#d97706' }} />
-              Tagarapuvalasa, Visakhapatnam, Andhra Pradesh 531162
+              {address}
             </li>
             <li className="flex items-center gap-3 text-sm text-ink-600">
               <Phone size={14} className="flex-shrink-0" style={{ color: '#d97706' }} />
-              <a href="tel:+919876543210" className="hover:text-ink-900 transition-colors">+91 98765 43210</a>
+              <a href={`tel:${phone.replace(/\s/g, '')}`} className="hover:text-ink-900 transition-colors">{phone}</a>
             </li>
             <li className="flex items-center gap-3 text-sm text-ink-600">
               <Mail size={14} className="flex-shrink-0" style={{ color: '#d97706' }} />
-              <a href="mailto:hello@dfcrestaurant.com" className="hover:text-ink-900 transition-colors truncate">hello@dfcrestaurant.com</a>
+              <a href={`mailto:${email}`} className="hover:text-ink-900 transition-colors truncate">{email}</a>
             </li>
           </ul>
         </div>
@@ -95,9 +105,17 @@ const Footer = () => {
             <li className="flex items-center gap-2"><Clock size={12} style={{ color: '#15803d' }} /> Mon–Fri: 10am – 10pm</li>
             <li className="flex items-center gap-2"><Clock size={12} style={{ color: '#15803d' }} /> Sat–Sun: 10am – 11pm</li>
           </ul>
-          <div className="mt-5 inline-flex items-center gap-2 rounded-full px-3 py-1.5" style={{ background: 'rgba(21,128,61,0.08)', border: '1px solid rgba(21,128,61,0.25)' }}>
-            <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#15803d' }} />
-            <span className="text-xs font-bold tracking-wide" style={{ color: '#15803d' }}>Open Now</span>
+          <div className="mt-5 inline-flex items-center gap-2 rounded-full px-3 py-1.5"
+            style={{
+              background: isOpen ? 'rgba(21,128,61,0.08)' : 'rgba(185,28,28,0.08)',
+              border: `1px solid ${isOpen ? 'rgba(21,128,61,0.25)' : 'rgba(185,28,28,0.25)'}`,
+            }}>
+            <span className="w-2 h-2 rounded-full animate-pulse"
+              style={{ background: isOpen ? '#15803d' : '#b91c1c' }} />
+            <span className="text-xs font-bold tracking-wide"
+              style={{ color: isOpen ? '#15803d' : '#b91c1c' }}>
+              {isOpen ? 'Open Now' : 'Currently Closed'}
+            </span>
           </div>
         </div>
       </div>
