@@ -85,9 +85,9 @@ const REVIEWS = [
 ];
 
 const WHY_US = [
-  { emoji: '🍳', title: 'Freshly Cooked', desc: 'Every dish is prepared fresh to order using authentic recipes and premium spices.', color: '#e2131c' },
-  { emoji: '⚡', title: 'Fast Delivery',   desc: 'Hot food at your door in 30–45 min. We never compromise on speed or quality.', color: '#f7780e' },
-  { emoji: '📍', title: 'Live Tracking',   desc: 'Watch your order move from kitchen to doorstep in real-time.', color: '#5b9e0f' },
+  { emoji: '🍳', title: 'Freshly Cooked', desc: 'Every dish is prepared fresh to order using authentic recipes and premium spices.', color: '#b91c1c' },
+  { emoji: '⚡', title: 'Fast Delivery',   desc: 'Hot food at your door in 30–45 min. We never compromise on speed or quality.', color: '#d97706' },
+  { emoji: '📍', title: 'Live Tracking',   desc: 'Watch your order move from kitchen to doorstep in real-time.', color: '#15803d' },
   { emoji: '🛡️', title: 'Food Safety',     desc: 'Prepared in a hygienic, certified kitchen by experienced chefs every single day.', color: '#dd5e06' },
 ];
 
@@ -144,10 +144,10 @@ const HomePage = () => {
           {isOpen !== null && (
             <motion.span initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
               className="inline-flex items-center gap-2 bg-white border text-sm font-semibold px-4 py-1.5 rounded-full mb-6 shadow-soft"
-              style={{ borderColor: isOpen ? 'rgba(91,158,15,0.3)' : 'rgba(226,19,28,0.3)' }}>
+              style={{ borderColor: isOpen ? 'rgba(21,128,61,0.3)' : 'rgba(185,28,28,0.3)' }}>
               <span className="w-2 h-2 rounded-full animate-pulse"
-                style={{ background: isOpen ? '#5b9e0f' : '#e2131c' }} />
-              <span style={{ color: isOpen ? '#3f7a0a' : '#b91c1c' }}>
+                style={{ background: isOpen ? '#15803d' : '#b91c1c' }} />
+              <span style={{ color: isOpen ? '#166534' : '#b91c1c' }}>
                 {isOpen ? 'Now accepting online orders' : 'Currently closed — check back soon!'}
               </span>
             </motion.span>
@@ -194,12 +194,12 @@ const HomePage = () => {
 
         {/* Marquee strip */}
         <div className="relative z-10 w-full mt-10 border-t border-b overflow-hidden py-3"
-          style={{ borderColor: 'rgba(226,19,28,0.12)', background: 'rgba(226,19,28,0.03)' }}>
+          style={{ borderColor: 'rgba(185,28,28,0.12)', background: 'rgba(185,28,28,0.03)' }}>
           <div className="marquee-inner">
             {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
               <span key={i} className="inline-flex items-center gap-2 px-6 text-sm font-bold tracking-wide whitespace-nowrap text-ink-700">
                 {item}
-                <span style={{ color: 'rgba(226,19,28,0.3)' }}>◆</span>
+                <span style={{ color: 'rgba(185,28,28,0.3)' }}>◆</span>
               </span>
             ))}
           </div>
@@ -213,11 +213,11 @@ const HomePage = () => {
         <Section className="max-w-7xl mt-10 mx-auto px-4 sm:px-6 pb-20">
           <div className="flex items-end justify-between mb-10">
             <div>
-              <p className="text-xs font-bold tracking-widest uppercase mb-1" style={{ color: '#e2131c' }}>Today's Picks</p>
+              <p className="text-xs font-bold tracking-widest uppercase mb-1" style={{ color: '#b91c1c' }}>Today's Picks</p>
               <h2 className="section-heading mb-1">Featured Dishes</h2>
               <p className="section-sub">Our chef's recommendations, served fresh</p>
             </div>
-            <Link to="/menu" className="flex items-center gap-1 text-sm font-semibold" style={{ color: '#e2131c' }}>
+            <Link to="/menu" className="flex items-center gap-1 text-sm font-semibold" style={{ color: '#b91c1c' }}>
               View all <ChevronRight size={16} />
             </Link>
           </div>
@@ -235,18 +235,18 @@ const HomePage = () => {
       {/* ── CATEGORIES GRID ─────────────────────────────────────────────── */}
       <Section className="max-w-7xl mx-auto px-4 sm:px-6 py-20">
         <div className="text-center mb-12">
-          <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#f7780e' }}>Explore Our Menu</p>
+          <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#d97706' }}>Explore Our Menu</p>
           <h2 className="section-heading mb-3">Popular Categories</h2>
           <p className="section-sub mx-auto text-center">Browse our most loved sections from both outlets</p>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 sm:gap-5">
           {[
-            { emoji: '🍗', label: 'Chicken',  cat: 'Starters', img: catChicken,  bg: '#fdeeee', border: 'rgba(226,19,28,0.15)',  accent: '#e2131c' },
-            { emoji: '🍚', label: 'Biryani',  cat: 'Biryani',  img: catBiryani,  bg: '#fff4ed', border: 'rgba(247,120,14,0.2)',   accent: '#f7780e' },
-            { emoji: '🍛', label: 'Curries',  cat: 'Curries',  img: catCurries,  bg: '#fff4ed', border: 'rgba(247,120,14,0.2)',   accent: '#f7780e' },
-            { emoji: '🔥', label: 'Tandoori', cat: 'Tandoori', img: catTandoori, bg: '#fdeeee', border: 'rgba(226,19,28,0.15)',  accent: '#e2131c' },
-            { emoji: '🍬', label: 'Sweets',   cat: 'Desserts', img: catSweets,   bg: '#f3f9ed', border: 'rgba(91,158,15,0.2)',   accent: '#5b9e0f' },
-            { emoji: '🥤', label: 'Drinks',   cat: 'Drinks',   img: catDrinks,   bg: '#f3f9ed', border: 'rgba(91,158,15,0.2)',   accent: '#5b9e0f' },
+            { emoji: '🍗', label: 'Chicken',  cat: 'Starters', img: catChicken,  bg: '#fef2f2', border: 'rgba(185,28,28,0.15)',  accent: '#b91c1c' },
+            { emoji: '🍚', label: 'Biryani',  cat: 'Biryani',  img: catBiryani,  bg: '#fffbeb', border: 'rgba(217,119,6,0.2)',   accent: '#d97706' },
+            { emoji: '🍛', label: 'Curries',  cat: 'Curries',  img: catCurries,  bg: '#fffbeb', border: 'rgba(217,119,6,0.2)',   accent: '#d97706' },
+            { emoji: '🔥', label: 'Tandoori', cat: 'Tandoori', img: catTandoori, bg: '#fef2f2', border: 'rgba(185,28,28,0.15)',  accent: '#b91c1c' },
+            { emoji: '🍬', label: 'Sweets',   cat: 'Desserts', img: catSweets,   bg: '#f0fdf4', border: 'rgba(21,128,61,0.2)',   accent: '#15803d' },
+            { emoji: '🥤', label: 'Drinks',   cat: 'Drinks',   img: catDrinks,   bg: '#f0fdf4', border: 'rgba(21,128,61,0.2)',   accent: '#15803d' },
           ].map(({ emoji, label, cat, img, bg, border, accent }, i) => (
             <motion.div key={cat} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: i * 0.05, duration: 0.4, ease: 'easeOut' }}>
@@ -289,7 +289,7 @@ const HomePage = () => {
       {/* ── VISIT OUR OUTLETS ────────────────────────────────────────── */}
       <Section className="max-w-5xl mx-auto px-4 sm:px-6 py-20">
         <div className="text-center mb-12">
-          <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#e2131c' }}>Come Say Hi</p>
+          <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#b91c1c' }}>Come Say Hi</p>
           <h2 className="section-heading mb-3">Visit Our <span className="gradient-text">Outlets</span></h2>
           <p className="section-sub font-serif italic text-lg mx-auto text-center">Two iconic locations, the same unforgettable taste</p>
         </div>
@@ -300,8 +300,8 @@ const HomePage = () => {
               img: storefrontPink,
               label: 'Outlet One',
               tag: ['Sweets', 'Bakery', 'Mocktails'],
-              accent: '#e2131c',
-              accentLight: 'rgba(226,19,28,0.1)',
+              accent: '#b91c1c',
+              accentLight: 'rgba(185,28,28,0.1)',
               mapUrl: 'https://maps.google.com/?q=Tagarapuvalasa,Visakhapatnam',
               address: 'Tagarapuvalasa, Visakhapatnam',
             },
@@ -309,9 +309,9 @@ const HomePage = () => {
               img: storefrontBlue,
               label: 'Outlet Two',
               tag: ['Biryani', 'Tandoori', 'Pizza'],
-              accent: '#5b9e0f',
-              accentLight: 'rgba(91,158,15,0.1)',
-              accentBorder: 'rgba(91,158,15,0.2)',
+              accent: '#15803d',
+              accentLight: 'rgba(21,128,61,0.1)',
+              accentBorder: 'rgba(21,128,61,0.2)',
               mapUrl: 'https://maps.google.com/?q=Tagarapuvalasa,Visakhapatnam',
               address: 'Tagarapuvalasa, Visakhapatnam',
             },
@@ -373,10 +373,10 @@ const HomePage = () => {
 
       {/* ── WHY CHOOSE US ────────────────────────────────────────────────── */}
       <Section className="relative overflow-hidden py-24 border-y"
-        style={{ background: 'linear-gradient(135deg, #fffdfb 0%, #fff4ed 50%, #fffdfb 100%)', borderColor: 'rgba(26,24,22,0.05)' }}>
+        style={{ background: 'linear-gradient(135deg, #fffdfb 0%, #fffbeb 50%, #fffdfb 100%)', borderColor: 'rgba(26,24,22,0.05)' }}>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
-            <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#f7780e' }}>Our Promise</p>
+            <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#d97706' }}>Our Promise</p>
             <h2 className="section-heading mb-3">Why Choose <span className="gradient-text">DFC?</span></h2>
             <p className="section-sub mx-auto text-center">We go above and beyond for every single order</p>
           </div>
@@ -401,12 +401,12 @@ const HomePage = () => {
       <Section className="max-w-7xl mx-auto px-4 sm:px-6 py-20">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <p className="text-xs font-bold tracking-widest uppercase mb-1" style={{ color: '#5b9e0f' }}>Exclusive Deals</p>
+            <p className="text-xs font-bold tracking-widest uppercase mb-1" style={{ color: '#15803d' }}>Exclusive Deals</p>
             <h2 className="section-heading mb-1">Today's Offers</h2>
             <p className="section-sub">Limited time deals, just for you</p>
           </div>
           {offers.length > 0 && (
-            <Link to="/offers" className="flex items-center gap-1 text-sm font-semibold" style={{ color: '#5b9e0f' }}>
+            <Link to="/offers" className="flex items-center gap-1 text-sm font-semibold" style={{ color: '#15803d' }}>
               All offers <ChevronRight size={16} />
             </Link>
           )}
@@ -416,9 +416,9 @@ const HomePage = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {offers.map((offer, i) => {
               const grads = [
-                'linear-gradient(135deg, #e2131c, #ec474a)',
-                'linear-gradient(135deg, #f7780e, #fb842f)',
-                'linear-gradient(135deg, #3f7a0a, #5b9e0f)',
+                'linear-gradient(135deg, #b91c1c, #ec474a)',
+                'linear-gradient(135deg, #d97706, #fb842f)',
+                'linear-gradient(135deg, #166534, #15803d)',
               ];
               return (
                 <motion.div key={offer._id} initial={{ opacity: 0, scale: 0.93 }} whileInView={{ opacity: 1, scale: 1 }}
@@ -450,27 +450,27 @@ const HomePage = () => {
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.5 }}
             className="relative overflow-hidden rounded-3xl text-center py-16 px-8"
-            style={{ background: 'linear-gradient(135deg, #fff8f2 0%, #fff4ed 100%)', border: '1.5px dashed rgba(247,120,14,0.3)' }}
+            style={{ background: 'linear-gradient(135deg, #fff8f2 0%, #fffbeb 100%)', border: '1.5px dashed rgba(217,119,6,0.3)' }}
           >
             {/* Decorative blobs */}
             <div className="absolute -top-10 -left-10 w-40 h-40 rounded-full pointer-events-none"
-              style={{ background: 'radial-gradient(circle, rgba(247,120,14,0.08) 0%, transparent 70%)' }} />
+              style={{ background: 'radial-gradient(circle, rgba(217,119,6,0.08) 0%, transparent 70%)' }} />
             <div className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full pointer-events-none"
-              style={{ background: 'radial-gradient(circle, rgba(226,19,28,0.06) 0%, transparent 70%)' }} />
+              style={{ background: 'radial-gradient(circle, rgba(185,28,28,0.06) 0%, transparent 70%)' }} />
 
             <div className="relative">
               {/* Bell icon with pulse ring */}
               <div className="relative inline-flex items-center justify-center mb-6">
                 <div className="absolute w-20 h-20 rounded-full animate-ping opacity-20"
-                  style={{ background: '#f7780e' }} />
+                  style={{ background: '#d97706' }} />
                 <div className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-soft"
-                  style={{ background: 'linear-gradient(135deg, #f7780e, #fb842f)', boxShadow: '0 8px 24px rgba(247,120,14,0.3)' }}>
+                  style={{ background: 'linear-gradient(135deg, #d97706, #fb842f)', boxShadow: '0 8px 24px rgba(217,119,6,0.3)' }}>
                   <Sparkles size={28} className="text-white" />
                 </div>
               </div>
 
               <h3 className="font-display text-2xl sm:text-3xl text-ink-900 tracking-wide mb-3">
-                Exciting Offers <span style={{ color: '#f7780e' }}>Coming Soon!</span>
+                Exciting Offers <span style={{ color: '#d97706' }}>Coming Soon!</span>
               </h3>
               <p className="text-ink-500 text-sm sm:text-base leading-relaxed max-w-md mx-auto mb-6">
                 We're cooking up some amazing deals just for you. Check back soon — great discounts on your favourite DFC dishes are on the way! 🎉
@@ -478,8 +478,8 @@ const HomePage = () => {
 
               {/* Status pill */}
               <span className="inline-flex items-center gap-2 bg-white border rounded-full px-5 py-2 text-sm font-semibold shadow-soft"
-                style={{ borderColor: 'rgba(247,120,14,0.25)', color: '#c46208' }}>
-                <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#f7780e' }} />
+                style={{ borderColor: 'rgba(217,119,6,0.25)', color: '#c46208' }}>
+                <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#d97706' }} />
                 No active offers right now
               </span>
             </div>
@@ -490,7 +490,7 @@ const HomePage = () => {
       {/* ── REVIEWS (scrolling ticker) ────────────────────────────────── */}
       <Section className="relative overflow-hidden py-20 border-y" style={{ borderColor: 'rgba(26,24,22,0.05)', background: '#fff8f2' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-12 text-center">
-          <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#e2131c' }}>Testimonials</p>
+          <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#b91c1c' }}>Testimonials</p>
           <h2 className="section-heading mb-3">What Our Customers Say</h2>
           <div className="flex justify-center gap-1 mt-3">
             <Stars count={5} size={16} />
@@ -522,7 +522,7 @@ const HomePage = () => {
           <div className="absolute -bottom-20 -right-20 w-64 h-64 orb-green rounded-full pointer-events-none" />
           <div className="relative grid grid-cols-1 lg:grid-cols-2">
             <div className="p-10 lg:p-14 space-y-6">
-              <span className="tag bg-cream-100 border border-ink-900/[0.06] uppercase tracking-wider" style={{ color: '#e2131c' }}>Delivery Info</span>
+              <span className="tag bg-cream-100 border border-ink-900/[0.06] uppercase tracking-wider" style={{ color: '#b91c1c' }}>Delivery Info</span>
               <h2 className="font-display text-3xl md:text-4xl tracking-wide text-ink-900 leading-tight">
                 We Deliver Across<br /><span className="gradient-text">Tagrapuvalsa</span>
               </h2>
@@ -533,7 +533,7 @@ const HomePage = () => {
               <div className="grid grid-cols-2 gap-3">
                 {['Tagarapuvalasa', 'Chittivalasa', 'Sangivalasa', 'Bheemunipatnam', 'Anandapuram', 'Junction Area'].map((area) => (
                   <div key={area} className="flex items-center gap-2 text-sm text-ink-600">
-                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#e2131c' }} />
+                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#b91c1c' }} />
                     {area}
                   </div>
                 ))}
@@ -542,9 +542,9 @@ const HomePage = () => {
             </div>
             <div className="p-10 lg:p-14 flex flex-col justify-center space-y-7 border-t lg:border-t-0 lg:border-l border-ink-900/[0.06]">
               {[
-                { icon: Clock, label: 'Delivery Time',   value: '30–45 minutes', color: '#e2131c' },
-                { icon: Bike,  label: 'Delivery Charge', value: '₹40 flat (Free above ₹299)', color: '#f7780e' },
-                { icon: Phone, label: 'Order Support',   value: '+91 98765 43210', color: '#5b9e0f' },
+                { icon: Clock, label: 'Delivery Time',   value: '30–45 minutes', color: '#b91c1c' },
+                { icon: Bike,  label: 'Delivery Charge', value: '₹40 flat (Free above ₹299)', color: '#d97706' },
+                { icon: Phone, label: 'Order Support',   value: '+91 98765 43210', color: '#15803d' },
               ].map(({ icon: Icon, label, value, color }) => (
                 <div key={label} className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${color}14`, border: `1px solid ${color}30` }}>
@@ -565,7 +565,7 @@ const HomePage = () => {
       <Section className="max-w-7xl mx-auto px-4 sm:px-6 pb-24">
         <motion.div whileInView={{ scale: [0.97, 1] }} viewport={{ once: true }} transition={{ duration: 0.6 }}
           className="relative overflow-hidden rounded-3xl p-14 text-center animated-gradient"
-          style={{ boxShadow: '0 20px 60px rgba(226,19,28,0.25)' }}>
+          style={{ boxShadow: '0 20px 60px rgba(185,28,28,0.25)' }}>
           <div className="relative">
             <img src={dfcLogo} alt="DFC" className="w-16 h-16 object-contain mx-auto mb-5 drop-shadow-lg" />
             <h2 className="font-display text-4xl sm:text-6xl text-white tracking-wide mb-4">READY TO ORDER? 🍽️</h2>

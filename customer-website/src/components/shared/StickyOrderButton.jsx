@@ -37,7 +37,7 @@ const StickyOrderButton = () => {
             className="flex items-center gap-3 text-white
                        font-bold px-6 py-4 rounded-full shadow-red-glow
                        active:scale-95 transition-all duration-200"
-            style={{ background: 'linear-gradient(135deg, #e2131c 0%, #f7780e 100%)' }}
+            style={{ background: 'linear-gradient(135deg, #b91c1c 0%, #d97706 100%)' }}
           >
             <ShoppingBag size={20} />
             <span>{count} item{count > 1 ? 's' : ''}</span>

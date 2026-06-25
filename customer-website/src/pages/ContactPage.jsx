@@ -9,11 +9,11 @@ const HOURS = [
 
 const CONTACT_CARDS = [
   { icon: Phone, title: 'Call Us', value: '+91 98765 43210', sub: 'Available during business hours',
-    href: 'tel:+919876543210', cta: 'Call Now', grad: 'linear-gradient(135deg, #e2131c, #f7780e)' },
+    href: 'tel:+919876543210', cta: 'Call Now', grad: 'linear-gradient(135deg, #b91c1c, #d97706)' },
   { icon: MessageCircle, title: 'WhatsApp', value: '+91 98765 43210', sub: 'Quick responses on WhatsApp',
-    href: 'https://wa.me/919876543210', cta: 'Chat Now', grad: 'linear-gradient(135deg, #3f7a0a, #5b9e0f)' },
+    href: 'https://wa.me/919876543210', cta: 'Chat Now', grad: 'linear-gradient(135deg, #166534, #15803d)' },
   { icon: Mail, title: 'Email Us', value: 'hello@dfcrestaurant.com', sub: 'We reply within 24 hours',
-    href: 'mailto:hello@dfcrestaurant.com', cta: 'Send Email', grad: 'linear-gradient(135deg, #f7780e, #fb842f)' },
+    href: 'mailto:hello@dfcrestaurant.com', cta: 'Send Email', grad: 'linear-gradient(135deg, #d97706, #fb842f)' },
 ];
 
 const ContactPage = () => {
@@ -58,7 +58,7 @@ const ContactPage = () => {
           <div className="space-y-5">
             <div className="card-premium p-6 space-y-5">
               <h3 className="font-bold text-ink-900 text-lg flex items-center gap-2">
-                <MapPin size={18} style={{ color: '#e2131c' }} /> Our Location
+                <MapPin size={18} style={{ color: '#b91c1c' }} /> Our Location
               </h3>
               <div className="space-y-2">
                 <p className="text-ink-900 font-semibold">Devi Food Court</p>
@@ -75,7 +75,7 @@ const ContactPage = () => {
 
             <div className="card-premium p-6 space-y-4">
               <h3 className="font-bold text-ink-900 text-lg flex items-center gap-2">
-                <Clock size={18} style={{ color: '#f7780e' }} /> Business Hours
+                <Clock size={18} style={{ color: '#d97706' }} /> Business Hours
               </h3>
               <div className="space-y-3">
                 {HOURS.map(({ days, time }) => (
@@ -85,9 +85,9 @@ const ContactPage = () => {
                   </div>
                 ))}
               </div>
-              <div className="flex items-center gap-2 rounded-xl px-4 py-3" style={{ background: 'rgba(91,158,15,0.08)', border: '1px solid rgba(91,158,15,0.2)' }}>
-                <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#5b9e0f' }} />
-                <span className="text-sm font-semibold" style={{ color: '#5b9e0f' }}>Currently Open</span>
+              <div className="flex items-center gap-2 rounded-xl px-4 py-3" style={{ background: 'rgba(21,128,61,0.08)', border: '1px solid rgba(21,128,61,0.2)' }}>
+                <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#15803d' }} />
+                <span className="text-sm font-semibold" style={{ color: '#15803d' }}>Currently Open</span>
               </div>
             </div>
 
@@ -96,8 +96,8 @@ const ContactPage = () => {
               <h3 className="font-bold text-ink-900 text-lg mb-4">Follow Us</h3>
               <div className="flex gap-3">
                 {[
-                  { icon: Instagram, label: 'Instagram', href: '#', color: '#e2131c' },
-                  { icon: Facebook,  label: 'Facebook',  href: '#', color: '#5b9e0f' },
+                  { icon: Instagram, label: 'Instagram', href: '#', color: '#b91c1c' },
+                  { icon: Facebook,  label: 'Facebook',  href: '#', color: '#15803d' },
                 ].map(({ icon: Icon, label, href, color }) => (
                   <a key={label} href={href} target="_blank" rel="noreferrer"
                     className="flex items-center gap-2 bg-cream-100 border border-ink-900/[0.06] rounded-xl px-4 py-2.5 text-ink-600 text-sm font-medium transition-all hover:text-white"
@@ -115,8 +115,8 @@ const ContactPage = () => {
           <div className="card-premium overflow-hidden h-full min-h-[400px] relative">
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8"
               style={{ background: 'linear-gradient(160deg, #fff8f2 0%, #fffdfb 100%)' }}>
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mb-4" style={{ background: 'rgba(226,19,28,0.08)' }}>
-                <MapPin size={32} style={{ color: '#e2131c' }} />
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mb-4" style={{ background: 'rgba(185,28,28,0.08)' }}>
+                <MapPin size={32} style={{ color: '#b91c1c' }} />
               </div>
               <h3 className="font-bold text-ink-900 text-xl mb-2">Find Us Here</h3>
               <p className="text-ink-500 text-sm mb-6">Tagarapuvalasa, Visakhapatnam, Andhra Pradesh</p>

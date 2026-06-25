@@ -5,10 +5,10 @@ import { getOffers } from '../services/api';
 import toast from 'react-hot-toast';
 
 const TYPE_CONFIG = {
-  combo:    { icon: Gift, label: 'Combo Deal', grad: 'linear-gradient(135deg, #5b9e0f, #79bd49)' },
-  coupon:   { icon: Tag,  label: 'Coupon',     grad: 'linear-gradient(135deg, #e2131c, #f7780e)' },
-  promo:    { icon: Zap,  label: 'Promotion',  grad: 'linear-gradient(135deg, #f7780e, #fb842f)' },
-  seasonal: { icon: Gift, label: 'Special',    grad: 'linear-gradient(135deg, #e2131c, #ec474a)' },
+  combo:    { icon: Gift, label: 'Combo Deal', grad: 'linear-gradient(135deg, #15803d, #79bd49)' },
+  coupon:   { icon: Tag,  label: 'Coupon',     grad: 'linear-gradient(135deg, #b91c1c, #d97706)' },
+  promo:    { icon: Zap,  label: 'Promotion',  grad: 'linear-gradient(135deg, #d97706, #fb842f)' },
+  seasonal: { icon: Gift, label: 'Special',    grad: 'linear-gradient(135deg, #b91c1c, #ec474a)' },
 };
 
 const OfferCard = ({ offer }) => {
@@ -92,7 +92,7 @@ const OffersPage = () => {
         {/* Hero */}
         <div className="text-center mb-12">
           <span className="inline-flex items-center gap-2 text-sm font-semibold px-4 py-1.5 rounded-full mb-5"
-            style={{ background: 'rgba(247,120,14,0.08)', border: '1px solid rgba(247,120,14,0.25)', color: '#dd5e06' }}>
+            style={{ background: 'rgba(217,119,6,0.08)', border: '1px solid rgba(217,119,6,0.25)', color: '#dd5e06' }}>
             <Zap size={14} /> Exclusive Deals
           </span>
           <h1 className="section-heading text-4xl md:text-5xl mb-4">Today's <span className="gradient-text">Offers</span></h1>

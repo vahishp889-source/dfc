@@ -42,11 +42,11 @@ const CartDrawer = () => {
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-ink-900/[0.06]">
               <div className="flex items-center gap-3">
-                <ShoppingBag size={22} style={{ color: '#f7780e' }} />
+                <ShoppingBag size={22} style={{ color: '#d97706' }} />
                 <h2 className="font-bold text-ink-900 text-lg">Your Cart</h2>
                 {items.length > 0 && (
                   <span className="text-white text-xs font-bold px-2 py-0.5 rounded-full"
-                    style={{ background: 'linear-gradient(135deg, #e2131c, #f7780e)' }}>
+                    style={{ background: 'linear-gradient(135deg, #b91c1c, #d97706)' }}>
                     {items.reduce((s, i) => s + i.quantity, 0)}
                   </span>
                 )}
@@ -84,7 +84,7 @@ const CartDrawer = () => {
 
                       <div className="flex-1 min-w-0">
                         <p className="font-semibold text-ink-900 text-sm truncate">{item.name}</p>
-                        <p className="font-bold text-sm mt-0.5" style={{ color: '#e2131c' }}>₹{item.price * item.quantity}</p>
+                        <p className="font-bold text-sm mt-0.5" style={{ color: '#b91c1c' }}>₹{item.price * item.quantity}</p>
                         <p className="text-ink-500 text-xs">₹{item.price} each</p>
                       </div>
 
@@ -117,7 +117,7 @@ const CartDrawer = () => {
                     <span className="text-ink-900 font-medium">₹{DELIVERY}</span>
                   </div>
                   <div className="flex justify-between font-bold text-base text-ink-900 pt-2 border-t border-ink-900/[0.06]">
-                    <span>Total</span><span style={{ color: '#e2131c' }}>₹{total + DELIVERY}</span>
+                    <span>Total</span><span style={{ color: '#b91c1c' }}>₹{total + DELIVERY}</span>
                   </div>
                 </div>
                 <button onClick={goCheckout} className="btn-primary w-full justify-center text-base py-3.5">

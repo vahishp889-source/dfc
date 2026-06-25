@@ -173,7 +173,7 @@ const TrackOrderPage = () => {
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <p className="text-ink-500 text-sm">Order ID</p>
-                  <p className="font-mono font-bold text-xl" style={{ color: '#e2131c' }}>{order.orderId}</p>
+                  <p className="font-mono font-bold text-xl" style={{ color: '#b91c1c' }}>{order.orderId}</p>
                 </div>
                 <div className={`px-3 py-1.5 rounded-full text-xs font-bold border
                   ${order.status === 'delivered' ? 'bg-green-50 text-green-700 border-green-200' :
@@ -204,10 +204,10 @@ const TrackOrderPage = () => {
             {/* Delivery partner details — shown once admin assigns a rider */}
             {order.assignedRider && order.status !== 'cancelled' && (
               <div className="card-premium p-5 flex items-center gap-4"
-                style={{ borderColor: 'rgba(91,158,15,0.25)', background: 'rgba(91,158,15,0.03)' }}>
+                style={{ borderColor: 'rgba(21,128,61,0.25)', background: 'rgba(21,128,61,0.03)' }}>
                 <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ background: 'rgba(91,158,15,0.12)' }}>
-                  <Bike size={22} style={{ color: '#5b9e0f' }} />
+                  style={{ background: 'rgba(21,128,61,0.12)' }}>
+                  <Bike size={22} style={{ color: '#15803d' }} />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-xs text-ink-500">
@@ -221,7 +221,7 @@ const TrackOrderPage = () => {
                 {order.assignedRider.phone && (
                   <a href={`tel:${order.assignedRider.phone}`}
                     className="flex items-center gap-1.5 text-sm font-semibold px-4 py-2.5 rounded-full text-white flex-shrink-0"
-                    style={{ background: 'linear-gradient(135deg, #3f7a0a, #5b9e0f)' }}>
+                    style={{ background: 'linear-gradient(135deg, #166534, #15803d)' }}>
                     <Phone size={14} /> Call
                   </a>
                 )}
@@ -238,7 +238,7 @@ const TrackOrderPage = () => {
             ) : (
               <div className="card-premium p-6">
                 <h3 className="font-bold text-ink-900 mb-6 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#f7780e' }} />
+                  <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#d97706' }} />
                   Live Order Status
                 </h3>
                 <div className="space-y-0">
@@ -253,18 +253,18 @@ const TrackOrderPage = () => {
                         <div className="flex flex-col items-center">
                           <div className={`w-9 h-9 rounded-full flex items-center justify-center border-2 transition-all
                             ${done ? 'border-transparent' : 'bg-cream-100 border-ink-900/[0.08]'}`}
-                            style={done ? { background: 'linear-gradient(135deg, #e2131c, #f7780e)', boxShadow: active ? '0 0 0 4px rgba(247,120,14,0.15)' : '' } : {}}>
+                            style={done ? { background: 'linear-gradient(135deg, #b91c1c, #d97706)', boxShadow: active ? '0 0 0 4px rgba(217,119,6,0.15)' : '' } : {}}>
                             <Icon size={15} className={done ? 'text-white' : 'text-ink-400'} />
                           </div>
                           {!isLast && (
                             <div className="w-0.5 flex-1 my-1 min-h-[24px] rounded-full transition-all"
-                              style={{ background: done && i < currentStepIndex ? '#f7780e' : 'rgba(26,24,22,0.08)' }} />
+                              style={{ background: done && i < currentStepIndex ? '#d97706' : 'rgba(26,24,22,0.08)' }} />
                           )}
                         </div>
                         <div className="pb-6 pt-1.5 min-w-0">
                           <p className={`font-semibold text-sm ${done ? 'text-ink-900' : 'text-ink-400'}`}>
                             {step.label}
-                            {active && <span className="ml-2 text-xs animate-pulse" style={{ color: '#f7780e' }}>● Live</span>}
+                            {active && <span className="ml-2 text-xs animate-pulse" style={{ color: '#d97706' }}>● Live</span>}
                           </p>
                           <p className={`text-xs mt-0.5 ${done ? 'text-ink-600' : 'text-ink-300'}`}>{step.desc}</p>
                         </div>
@@ -328,7 +328,7 @@ const TrackOrderPage = () => {
                           </p>
                           {h.assignedRider?.name && (
                             <p className="text-xs text-ink-500 flex items-center gap-1 mt-0.5">
-                              <Bike size={11} style={{ color: '#5b9e0f' }} /> {h.assignedRider.name}
+                              <Bike size={11} style={{ color: '#15803d' }} /> {h.assignedRider.name}
                             </p>
                           )}
                         </div>

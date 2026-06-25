@@ -90,8 +90,8 @@ const CheckoutPage = () => {
       <div className="min-h-screen pt-20 flex items-center justify-center px-4 bg-cream-50">
         <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-center max-w-md w-full">
           <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-            className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{ background: 'rgba(91,158,15,0.1)' }}>
-            <CheckCircle size={40} style={{ color: '#5b9e0f' }} />
+            className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{ background: 'rgba(21,128,61,0.1)' }}>
+            <CheckCircle size={40} style={{ color: '#15803d' }} />
           </motion.div>
 
           <h2 className="font-display text-3xl tracking-wide text-ink-900 mb-2">Order Placed!</h2>
@@ -100,7 +100,7 @@ const CheckoutPage = () => {
           <div className="card-premium p-6 mb-6 text-left space-y-3">
             <div className="text-center border-b border-ink-900/[0.06] pb-4 mb-4">
               <p className="text-ink-500 text-sm">Order ID</p>
-              <p className="font-mono font-bold text-xl tracking-wider" style={{ color: '#e2131c' }}>{placed.orderId}</p>
+              <p className="font-mono font-bold text-xl tracking-wider" style={{ color: '#b91c1c' }}>{placed.orderId}</p>
               <p className="text-ink-400 text-xs mt-1">Save this for tracking</p>
             </div>
             <div className="flex justify-between text-sm">
@@ -149,7 +149,7 @@ const CheckoutPage = () => {
           {/* Form */}
           <form onSubmit={handleSubmit} className="lg:col-span-3 space-y-5">
             <div className="card-premium p-6 space-y-4">
-              <h3 className="font-bold text-ink-900 flex items-center gap-2"><User size={17} style={{ color: '#e2131c' }} /> Delivery Details</h3>
+              <h3 className="font-bold text-ink-900 flex items-center gap-2"><User size={17} style={{ color: '#b91c1c' }} /> Delivery Details</h3>
 
               <div>
                 <label className="block text-sm text-ink-600 mb-1.5">Full Name *</label>
@@ -179,17 +179,17 @@ const CheckoutPage = () => {
               {pinnedLocation ? (
                 <button type="button" onClick={() => setShowMapPicker(true)}
                   className="w-full flex items-center gap-3 rounded-xl px-4 py-3 text-left transition-colors"
-                  style={{ background: 'rgba(91,158,15,0.06)', border: '1px solid rgba(91,158,15,0.3)' }}>
-                  <MapPinned size={17} className="flex-shrink-0" style={{ color: '#5b9e0f' }} />
+                  style={{ background: 'rgba(21,128,61,0.06)', border: '1px solid rgba(21,128,61,0.3)' }}>
+                  <MapPinned size={17} className="flex-shrink-0" style={{ color: '#15803d' }} />
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold" style={{ color: '#5b9e0f' }}>Location pinned on map ✓</p>
+                    <p className="text-sm font-semibold" style={{ color: '#15803d' }}>Location pinned on map ✓</p>
                     <p className="text-ink-500 text-xs truncate">Tap to adjust the pin</p>
                   </div>
                 </button>
               ) : (
                 <button type="button" onClick={() => setShowMapPicker(true)}
                   className="w-full flex items-center justify-center gap-2 bg-cream-100 hover:bg-cream-200 border border-ink-900/[0.08] rounded-xl px-4 py-3 text-sm font-medium text-ink-700 transition-colors">
-                  <MapPinned size={16} style={{ color: '#f7780e' }} /> Pin exact location on map
+                  <MapPinned size={16} style={{ color: '#d97706' }} /> Pin exact location on map
                 </button>
               )}
 
@@ -208,12 +208,12 @@ const CheckoutPage = () => {
 
             {/* Coupon */}
             <div className="card-premium p-6 space-y-3">
-              <h3 className="font-bold text-ink-900 flex items-center gap-2"><Tag size={17} style={{ color: '#f7780e' }} /> Coupon Code</h3>
+              <h3 className="font-bold text-ink-900 flex items-center gap-2"><Tag size={17} style={{ color: '#d97706' }} /> Coupon Code</h3>
               {coupon ? (
-                <div className="flex items-center gap-3 rounded-xl px-4 py-3" style={{ background: 'rgba(91,158,15,0.06)', border: '1px solid rgba(91,158,15,0.3)' }}>
-                  <CheckCircle size={16} style={{ color: '#5b9e0f' }} />
+                <div className="flex items-center gap-3 rounded-xl px-4 py-3" style={{ background: 'rgba(21,128,61,0.06)', border: '1px solid rgba(21,128,61,0.3)' }}>
+                  <CheckCircle size={16} style={{ color: '#15803d' }} />
                   <div className="flex-1">
-                    <p className="font-semibold text-sm" style={{ color: '#5b9e0f' }}>{coupon.code} applied!</p>
+                    <p className="font-semibold text-sm" style={{ color: '#15803d' }}>{coupon.code} applied!</p>
                     <p className="text-ink-500 text-xs">
                       {coupon.discount > 0 ? `Saved ₹${coupon.discount}` : ''}
                       {coupon.freeDelivery ? ' + Free delivery' : ''}
@@ -239,10 +239,10 @@ const CheckoutPage = () => {
             {/* Closed banner OR Place Order button */}
             {!isOpen ? (
               <div className="rounded-2xl p-5 flex items-center gap-4"
-                style={{ background: 'rgba(226,19,28,0.06)', border: '1.5px solid rgba(226,19,28,0.25)' }}>
+                style={{ background: 'rgba(185,28,28,0.06)', border: '1.5px solid rgba(185,28,28,0.25)' }}>
                 <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                  style={{ background: 'rgba(226,19,28,0.1)' }}>
-                  <AlertCircle size={22} style={{ color: '#e2131c' }} />
+                  style={{ background: 'rgba(185,28,28,0.1)' }}>
+                  <AlertCircle size={22} style={{ color: '#b91c1c' }} />
                 </div>
                 <div>
                   <p className="font-bold text-ink-900">Restaurant is Currently Closed</p>
@@ -279,23 +279,23 @@ const CheckoutPage = () => {
                   <span>Subtotal</span><span className="text-ink-900">₹{sub}</span>
                 </div>
                 {discount > 0 && (
-                  <div className="flex justify-between" style={{ color: '#5b9e0f' }}>
+                  <div className="flex justify-between" style={{ color: '#15803d' }}>
                     <span>Coupon discount</span><span>-₹{discount}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-ink-600">
                   <span className="flex items-center gap-1.5"><Bike size={13} /> Delivery</span>
-                  <span style={coupon?.freeDelivery ? { color: '#5b9e0f' } : {}} className={!coupon?.freeDelivery ? 'text-ink-900' : ''}>
+                  <span style={coupon?.freeDelivery ? { color: '#15803d' } : {}} className={!coupon?.freeDelivery ? 'text-ink-900' : ''}>
                     {coupon?.freeDelivery ? 'FREE' : `₹${DELIVERY}`}
                   </span>
                 </div>
                 <div className="flex justify-between font-bold text-base text-ink-900 pt-2 border-t border-ink-900/[0.06]">
-                  <span>Total</span><span style={{ color: '#e2131c' }}>₹{total}</span>
+                  <span>Total</span><span style={{ color: '#b91c1c' }}>₹{total}</span>
                 </div>
               </div>
 
               <div className="bg-cream-100 rounded-xl p-3 text-xs text-ink-600 flex items-start gap-2">
-                <MapPin size={13} className="mt-0.5 flex-shrink-0" style={{ color: '#f7780e' }} />
+                <MapPin size={13} className="mt-0.5 flex-shrink-0" style={{ color: '#d97706' }} />
                 Cash on Delivery. Please keep exact change ready.
               </div>
             </div>

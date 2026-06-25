@@ -22,7 +22,7 @@ const MenuCard = ({ item, cartRef }) => {
     addItem(item);
     toast.success(`${item.name} added!`, {
       duration: 1500, icon: '✓',
-      style: { background: '#1a1816', color: '#fff', border: '1px solid rgba(247,120,14,0.3)', fontSize: '14px' },
+      style: { background: '#1a1816', color: '#fff', border: '1px solid rgba(217,119,6,0.3)', fontSize: '14px' },
     });
   };
 
@@ -33,7 +33,7 @@ const MenuCard = ({ item, cartRef }) => {
     <motion.div layout initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
       className={`group relative rounded-2xl overflow-hidden flex flex-col card-hover bg-white border shadow-soft
         ${soldOut ? 'border-ink-900/[0.06] opacity-75' : 'border-ink-900/[0.06]'}`}
-      whileHover={soldOut ? {} : { boxShadow: '0 12px 32px rgba(226,19,28,0.12)', borderColor: 'rgba(226,19,28,0.18)' }}
+      whileHover={soldOut ? {} : { boxShadow: '0 12px 32px rgba(185,28,28,0.12)', borderColor: 'rgba(185,28,28,0.18)' }}
     >
       {/* Image */}
       <div className="relative aspect-[4/3] overflow-hidden bg-cream-100">
@@ -69,11 +69,11 @@ const MenuCard = ({ item, cartRef }) => {
           <div className="absolute top-2.5 right-2.5 flex flex-col gap-1.5 items-end">
             {item.isBestSeller && (
               <span className="text-xs font-bold px-2 py-0.5 rounded-full text-white shadow-sm"
-                style={{ background: 'linear-gradient(135deg, #f7780e, #fb842f)' }}>⭐ Best</span>
+                style={{ background: 'linear-gradient(135deg, #d97706, #fb842f)' }}>⭐ Best</span>
             )}
             {discount > 0 && (
               <span className="text-xs font-bold px-2 py-0.5 rounded-full text-white shadow-sm"
-                style={{ background: 'linear-gradient(135deg, #e2131c, #ec474a)' }}>{discount}% OFF</span>
+                style={{ background: 'linear-gradient(135deg, #b91c1c, #ec474a)' }}>{discount}% OFF</span>
             )}
           </div>
         )}
@@ -111,7 +111,7 @@ const MenuCard = ({ item, cartRef }) => {
           ) : qty === 0 ? (
             <button onClick={handleAdd} disabled={isAdding}
               className="flex items-center gap-1 text-xs sm:text-sm font-bold px-3 py-1.5 sm:px-4 sm:py-1.5 rounded-full transition-all active:scale-95 disabled:opacity-60 text-white"
-              style={{ background: 'linear-gradient(135deg, #e2131c, #f7780e)', boxShadow: '0 4px 14px rgba(226,19,28,0.25)' }}>
+              style={{ background: 'linear-gradient(135deg, #b91c1c, #d97706)', boxShadow: '0 4px 14px rgba(185,28,28,0.25)' }}>
               <Plus size={13} /> Add
             </button>
           ) : (
@@ -123,7 +123,7 @@ const MenuCard = ({ item, cartRef }) => {
               <span className="text-ink-900 font-bold text-xs sm:text-sm w-4 sm:w-5 text-center">{qty}</span>
               <button onClick={handleAdd}
                 className="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center transition-all text-white active:scale-95"
-                style={{ background: 'linear-gradient(135deg, #e2131c, #f7780e)' }}>
+                style={{ background: 'linear-gradient(135deg, #b91c1c, #d97706)' }}>
                 <Plus size={10} />
               </button>
             </div>

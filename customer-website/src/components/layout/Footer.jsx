@@ -20,10 +20,10 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative overflow-hidden border-t mt-16" style={{ borderColor: 'rgba(26,24,22,0.06)', background: '#fffdfb' }}>
+    <footer className="relative overflow-hidden border-t mt-16" style={{ borderColor: 'rgba(26,24,22,0.08)', background: '#fff7ed' }}>
 
       {/* Top tricolor divider */}
-      <div className="h-[3px] w-full" style={{ background: 'linear-gradient(90deg, #e2131c, #f7780e, #5b9e0f)' }} />
+      <div className="h-[3px] w-full" style={{ background: 'linear-gradient(90deg, #b91c1c, #d97706, #15803d)' }} />
 
       {/* Ambient soft orbs */}
       <div className="absolute -bottom-20 -left-20 w-72 h-72 orb-red rounded-full pointer-events-none" />
@@ -42,8 +42,8 @@ const Footer = () => {
           </p>
           <div className="flex gap-3">
             {[
-              { href: '#', Icon: Instagram, color: '#e2131c' },
-              { href: '#', Icon: Facebook,  color: '#5b9e0f' },
+              { href: '#', Icon: Instagram, color: '#b91c1c' },
+              { href: '#', Icon: Facebook,  color: '#15803d' },
             ].map(({ href, Icon, color }) => (
               <a key={color} href={href}
                 className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 bg-ink-900/[0.04] border border-ink-900/[0.06] hover:shadow-soft"
@@ -56,7 +56,7 @@ const Footer = () => {
 
         {/* Quick links */}
         <div>
-          <h4 className="font-bold text-xs uppercase tracking-widest mb-5" style={{ color: '#e2131c' }}>Quick Links</h4>
+          <h4 className="font-bold text-xs uppercase tracking-widest mb-5" style={{ color: '#b91c1c' }}>Quick Links</h4>
           <ul className="space-y-2.5">
             {[['/', 'Home'], ['/menu', 'Menu'], ['/offers', 'Offers'], ['/track', 'Track Order'], ['/contact', 'Contact']].map(([to, label]) => (
               <li key={to}>
@@ -71,18 +71,18 @@ const Footer = () => {
 
         {/* Contact */}
         <div>
-          <h4 className="font-bold text-xs uppercase tracking-widest mb-5" style={{ color: '#f7780e' }}>Contact</h4>
+          <h4 className="font-bold text-xs uppercase tracking-widest mb-5" style={{ color: '#d97706' }}>Contact</h4>
           <ul className="space-y-3.5">
             <li className="flex items-start gap-3 text-sm text-ink-600">
-              <MapPin size={14} className="mt-0.5 flex-shrink-0" style={{ color: '#f7780e' }} />
+              <MapPin size={14} className="mt-0.5 flex-shrink-0" style={{ color: '#d97706' }} />
               Tagarapuvalasa, Visakhapatnam, Andhra Pradesh 531162
             </li>
             <li className="flex items-center gap-3 text-sm text-ink-600">
-              <Phone size={14} className="flex-shrink-0" style={{ color: '#f7780e' }} />
+              <Phone size={14} className="flex-shrink-0" style={{ color: '#d97706' }} />
               <a href="tel:+919876543210" className="hover:text-ink-900 transition-colors">+91 98765 43210</a>
             </li>
             <li className="flex items-center gap-3 text-sm text-ink-600">
-              <Mail size={14} className="flex-shrink-0" style={{ color: '#f7780e' }} />
+              <Mail size={14} className="flex-shrink-0" style={{ color: '#d97706' }} />
               <a href="mailto:hello@dfcrestaurant.com" className="hover:text-ink-900 transition-colors truncate">hello@dfcrestaurant.com</a>
             </li>
           </ul>
@@ -90,14 +90,14 @@ const Footer = () => {
 
         {/* Hours */}
         <div>
-          <h4 className="font-bold text-xs uppercase tracking-widest mb-5" style={{ color: '#5b9e0f' }}>Hours</h4>
+          <h4 className="font-bold text-xs uppercase tracking-widest mb-5" style={{ color: '#15803d' }}>Hours</h4>
           <ul className="space-y-2 text-sm text-ink-600">
-            <li className="flex items-center gap-2"><Clock size={12} style={{ color: '#5b9e0f' }} /> Mon–Fri: 10am – 10pm</li>
-            <li className="flex items-center gap-2"><Clock size={12} style={{ color: '#5b9e0f' }} /> Sat–Sun: 10am – 11pm</li>
+            <li className="flex items-center gap-2"><Clock size={12} style={{ color: '#15803d' }} /> Mon–Fri: 10am – 10pm</li>
+            <li className="flex items-center gap-2"><Clock size={12} style={{ color: '#15803d' }} /> Sat–Sun: 10am – 11pm</li>
           </ul>
-          <div className="mt-5 inline-flex items-center gap-2 rounded-full px-3 py-1.5" style={{ background: 'rgba(91,158,15,0.08)', border: '1px solid rgba(91,158,15,0.25)' }}>
-            <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#5b9e0f' }} />
-            <span className="text-xs font-bold tracking-wide" style={{ color: '#5b9e0f' }}>Open Now</span>
+          <div className="mt-5 inline-flex items-center gap-2 rounded-full px-3 py-1.5" style={{ background: 'rgba(21,128,61,0.08)', border: '1px solid rgba(21,128,61,0.25)' }}>
+            <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#15803d' }} />
+            <span className="text-xs font-bold tracking-wide" style={{ color: '#15803d' }}>Open Now</span>
           </div>
         </div>
       </div>

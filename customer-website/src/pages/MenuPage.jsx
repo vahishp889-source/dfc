@@ -57,7 +57,7 @@ const MenuPage = () => {
           <div className="orb-green absolute w-64 h-64 top-0 left-0 rounded-full" />
         </div>
         <div className="relative max-w-7xl mx-auto text-center">
-          <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#e2131c' }}>Full Menu</p>
+          <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#b91c1c' }}>Full Menu</p>
           <h1 className="sign-text text-5xl sm:text-6xl tracking-wide mb-3 text-ink-900">
             OUR <span className="gradient-text">MENU</span>
           </h1>
@@ -131,11 +131,11 @@ const MenuPage = () => {
                   <div className="flex items-center gap-3">
                     <span className="sign-text text-2xl tracking-wide text-ink-900">{category}</span>
                     <span className="text-xs font-bold px-2.5 py-0.5 rounded-full"
-                      style={{ background: 'rgba(226,19,28,0.08)', color: '#e2131c', border: '1px solid rgba(226,19,28,0.15)' }}>
+                      style={{ background: 'rgba(185,28,28,0.08)', color: '#b91c1c', border: '1px solid rgba(185,28,28,0.15)' }}>
                       {categoryItems.length}
                     </span>
                   </div>
-                  <div className="flex-1 h-px" style={{ background: 'linear-gradient(to right, rgba(226,19,28,0.18), transparent)' }} />
+                  <div className="flex-1 h-px" style={{ background: 'linear-gradient(to right, rgba(185,28,28,0.18), transparent)' }} />
                 </div>
                 <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5">
                   <AnimatePresence>

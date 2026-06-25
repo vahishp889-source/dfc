@@ -67,7 +67,7 @@ const Layout = () => {
             fontSize: '14px',
             fontWeight: 500,
           },
-          success: { iconTheme: { primary: '#f7780e', secondary: '#fff' } },
+          success: { iconTheme: { primary: '#d97706', secondary: '#fff' } },
           duration: 2500,
         }}
       />

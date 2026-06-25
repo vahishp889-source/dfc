@@ -75,7 +75,7 @@ const LocationPicker = ({ initial, onConfirm, onClose }) => {
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-ink-900/[0.06] flex-shrink-0">
           <h2 className="font-bold text-ink-900 flex items-center gap-2">
-            <MapPin size={17} style={{ color: '#e2131c' }} /> Pin Your Location
+            <MapPin size={17} style={{ color: '#b91c1c' }} /> Pin Your Location
           </h2>
           <button onClick={onClose} className="p-2 hover:bg-ink-900/[0.05] rounded-lg transition-colors">
             <X size={18} className="text-ink-500" />

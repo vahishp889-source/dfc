@@ -13,17 +13,17 @@
   }
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { @apply bg-cream-100; }
-  ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #e2131c, #f7780e); border-radius: 9999px; }
+  ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #b91c1c, #d97706); border-radius: 9999px; }
 }
 
 @layer components {
   .btn-primary {
     @apply text-white font-semibold px-6 py-3 rounded-full transition-all duration-200
            active:scale-95 inline-flex items-center gap-2;
-    background: linear-gradient(135deg, #e2131c 0%, #f7780e 100%);
-    box-shadow: 0 8px 24px rgba(226,19,28,0.25);
+    background: linear-gradient(135deg, #b91c1c 0%, #d97706 100%);
+    box-shadow: 0 8px 24px rgba(185,28,28,0.25);
   }
-  .btn-primary:hover { box-shadow: 0 10px 32px rgba(226,19,28,0.35); transform: translateY(-1px); }
+  .btn-primary:hover { box-shadow: 0 10px 32px rgba(185,28,28,0.35); transform: translateY(-1px); }
   .btn-outline {
     @apply border-2 border-ink-900/10 text-ink-900 hover:border-ink-900/20 hover:bg-ink-900/[0.03]
            font-semibold px-6 py-3 rounded-full transition-all duration-200 inline-flex items-center gap-2;
@@ -51,20 +51,20 @@
 
 /* Gradient text utilities (logo palette) */
 .gradient-text {
-  background: linear-gradient(135deg, #e2131c 0%, #f7780e 55%, #5b9e0f 100%);
+  background: linear-gradient(135deg, #b91c1c 0%, #d97706 55%, #15803d 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 .gradient-text-warm {
-  background: linear-gradient(135deg, #e2131c 0%, #f7780e 100%);
+  background: linear-gradient(135deg, #b91c1c 0%, #d97706 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-.text-glow-red    { filter: drop-shadow(0 4px 14px rgba(226,19,28,0.3)); }
-.text-glow-orange { filter: drop-shadow(0 4px 14px rgba(247,120,14,0.3)); }
-.text-glow-green  { filter: drop-shadow(0 4px 14px rgba(91,158,15,0.3)); }
+.text-glow-red    { filter: drop-shadow(0 4px 14px rgba(185,28,28,0.3)); }
+.text-glow-orange { filter: drop-shadow(0 4px 14px rgba(217,119,6,0.3)); }
+.text-glow-green  { filter: drop-shadow(0 4px 14px rgba(21,128,61,0.3)); }
 
 /* Animated tricolor gradient background (used sparingly, e.g. CTA banner) */
 .animated-gradient {
-  background: linear-gradient(120deg, #e2131c, #f7780e, #5b9e0f, #f7780e, #e2131c);
+  background: linear-gradient(120deg, #b91c1c, #d97706, #15803d, #d97706, #b91c1c);
   background-size: 300% 300%;
   animation: gradientX 7s ease infinite;
 }
@@ -80,16 +80,16 @@
 }
 
 /* Category pills */
-.cat-pill-active { @apply text-white shadow-orange-glow; background: linear-gradient(135deg, #e2131c, #f7780e); }
+.cat-pill-active { @apply text-white shadow-orange-glow; background: linear-gradient(135deg, #b91c1c, #d97706); }
 .cat-pill        { @apply bg-white text-ink-600 hover:text-ink-900 border border-ink-900/10; }
 
 /* Display font for big headline lockups */
 .sign-text { font-family: 'Bebas Neue', 'Playfair Display', serif; letter-spacing: 0.06em; }
 
 /* Soft gradient orb blobs (very light opacity for premium white-bg ambience) */
-.orb-red    { background: radial-gradient(circle, rgba(226,19,28,0.14) 0%, transparent 70%); }
-.orb-orange { background: radial-gradient(circle, rgba(247,120,14,0.14) 0%, transparent 70%); }
-.orb-green  { background: radial-gradient(circle, rgba(91,158,15,0.12) 0%, transparent 70%); }
+.orb-red    { background: radial-gradient(circle, rgba(185,28,28,0.14) 0%, transparent 70%); }
+.orb-orange { background: radial-gradient(circle, rgba(217,119,6,0.14) 0%, transparent 70%); }
+.orb-green  { background: radial-gradient(circle, rgba(21,128,61,0.12) 0%, transparent 70%); }
 
 /* Full-bleed photo banner sections (storefront photos as backgrounds) */
 .photo-banner {
