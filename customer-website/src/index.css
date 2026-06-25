@@ -131,3 +131,11 @@
   .marquee-inner, .marquee-inner-slow { animation: none; }
   .orb-red, .orb-orange, .orb-green   { animation: none; }
 }
+
+/* Touch scroll momentum & smooth scrolling for all scroll containers */
+.overflow-x-auto,
+.overflow-y-auto,
+.overflow-auto {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
