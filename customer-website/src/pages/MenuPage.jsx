@@ -111,7 +111,7 @@ const MenuPage = () => {
 
         {/* Loading skeletons */}
         {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5">
             {Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="rounded-2xl overflow-hidden bg-white border border-ink-900/[0.06]">
                 <div className="aspect-[4/3] skeleton" />
@@ -137,7 +137,7 @@ const MenuPage = () => {
                   </div>
                   <div className="flex-1 h-px" style={{ background: 'linear-gradient(to right, rgba(226,19,28,0.18), transparent)' }} />
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5">
                   <AnimatePresence>
                     {categoryItems.map((item, i) => (
                       <motion.div key={item._id}

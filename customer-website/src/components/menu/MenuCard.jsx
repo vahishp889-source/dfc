@@ -84,47 +84,47 @@ const MenuCard = ({ item, cartRef }) => {
       </div>
 
       {/* Body */}
-      <div className="p-4 flex flex-col flex-1">
-        <h3 className="font-bold text-ink-900 text-sm leading-snug mb-1 line-clamp-1">{item.name}</h3>
+      <div className="p-3 sm:p-4 flex flex-col flex-1">
+        <h3 className="font-bold text-ink-900 text-xs sm:text-sm leading-snug mb-1 line-clamp-1">{item.name}</h3>
         {item.description && (
-          <p className="text-ink-500 text-xs leading-relaxed line-clamp-2 mb-2">{item.description}</p>
+          <p className="text-ink-500 text-[10px] sm:text-xs leading-relaxed line-clamp-2 mb-2">{item.description}</p>
         )}
         {!soldOut && item.prepTimeMinutes && (
-          <p className="text-ink-400 text-xs mb-2">⏱ {item.prepTimeMinutes} min</p>
+          <p className="text-ink-400 text-[10px] sm:text-xs mb-2">⏱ {item.prepTimeMinutes} min</p>
         )}
         {soldOut && (
-          <p className="text-red-500 text-xs font-semibold mb-2">Currently unavailable</p>
+          <p className="text-red-500 text-[10px] sm:text-xs font-semibold mb-2">Unavailable</p>
         )}
 
         <div className="flex items-center justify-between mt-auto">
           <div>
-            <span className={`font-bold text-base ${soldOut ? 'text-ink-400' : 'text-ink-900'}`}>₹{item.price}</span>
+            <span className={`font-bold text-sm sm:text-base ${soldOut ? 'text-ink-400' : 'text-ink-900'}`}>₹{item.price}</span>
             {item.mrp && item.mrp > item.price && (
-              <span className="text-ink-400 text-xs line-through ml-2">₹{item.mrp}</span>
+              <span className="text-ink-400 text-[10px] sm:text-xs line-through ml-1.5 sm:ml-2">₹{item.mrp}</span>
             )}
           </div>
 
           {soldOut ? (
-            <span className="flex items-center gap-1.5 text-xs font-bold px-4 py-1.5 rounded-full bg-ink-100 text-ink-400 cursor-not-allowed">
+            <span className="flex items-center gap-1 text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-full bg-ink-100 text-ink-400 cursor-not-allowed">
               Sold Out
             </span>
           ) : qty === 0 ? (
             <button onClick={handleAdd} disabled={isAdding}
-              className="flex items-center gap-1.5 text-sm font-bold px-4 py-1.5 rounded-full transition-all active:scale-95 disabled:opacity-60 text-white"
+              className="flex items-center gap-1 text-xs sm:text-sm font-bold px-3 py-1.5 sm:px-4 sm:py-1.5 rounded-full transition-all active:scale-95 disabled:opacity-60 text-white"
               style={{ background: 'linear-gradient(135deg, #e2131c, #f7780e)', boxShadow: '0 4px 14px rgba(226,19,28,0.25)' }}>
-              <Plus size={14} /> Add
+              <Plus size={13} /> Add
             </button>
           ) : (
-            <div className="flex items-center gap-1 rounded-full p-1 bg-orange-50 border border-orange-200">
+            <div className="flex items-center gap-0.5 sm:gap-1 rounded-full p-0.5 sm:p-1 bg-orange-50 border border-orange-200">
               <button onClick={() => updateQty(item._id, qty - 1)}
-                className="w-6 h-6 rounded-full flex items-center justify-center transition-all text-ink-700 hover:bg-white">
-                <Minus size={12} />
+                className="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center transition-all text-ink-700 hover:bg-white">
+                <Minus size={10} />
               </button>
-              <span className="text-ink-900 font-bold text-sm w-5 text-center">{qty}</span>
+              <span className="text-ink-900 font-bold text-xs sm:text-sm w-4 sm:w-5 text-center">{qty}</span>
               <button onClick={handleAdd}
-                className="w-6 h-6 rounded-full flex items-center justify-center transition-all text-white active:scale-95"
+                className="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center transition-all text-white active:scale-95"
                 style={{ background: 'linear-gradient(135deg, #e2131c, #f7780e)' }}>
-                <Plus size={12} />
+                <Plus size={10} />
               </button>
             </div>
           )}

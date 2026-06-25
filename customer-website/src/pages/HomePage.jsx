@@ -154,28 +154,28 @@ const HomePage = () => {
           )}
 
           {/* Headline with moving type animation */}
-          <h1 className="font-display text-5xl sm:text-7xl md:text-8xl leading-[0.95] tracking-wide mb-4">
+          <h1 className="font-display text-4xl sm:text-7xl md:text-8xl leading-[0.95] tracking-wide mb-4">
             <TypeReveal text="DEVI FOOD COURT" className="block gradient-text" delay={0.5} />
           </h1>
 
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6, duration: 0.6 }}
-            className="font-serif italic text-ink-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto mb-8">
+            className="font-serif italic text-ink-600 text-sm sm:text-base md:text-xl leading-relaxed max-w-xl mx-auto mb-8">
             Authentic biryani, tandoori, sweets, bakery &amp; mocktails —
             crafted fresh by expert chefs, delivered hot to your door.
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.8 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
-            <Link to="/menu" className="btn-primary text-base px-8 py-3.5">
-              Order Now <ArrowRight size={18} />
+            className="flex flex-row items-center justify-center gap-3 mb-10">
+            <Link to="/menu" className="btn-primary text-xs sm:text-base px-5 py-2.5 sm:px-8 sm:py-3.5">
+              Order Now <ArrowRight size={14} className="sm:w-[18px] sm:h-[18px]" />
             </Link>
-            <Link to="/offers" className="btn-outline text-base px-8 py-3.5">
+            <Link to="/offers" className="btn-outline text-xs sm:text-base px-5 py-2.5 sm:px-8 sm:py-3.5">
               Today's Offers
             </Link>
           </motion.div>
 
           {/* Stats */}
-          <div className="flex items-center justify-center gap-10">
+          <div className="flex items-center justify-center gap-4 sm:gap-10">
             {[
               { target: 500, suffix: '+',   label: 'Happy Customers' },
               { target: 4.9, suffix: '★',   label: 'Avg Rating' },
@@ -183,10 +183,10 @@ const HomePage = () => {
             ].map(({ target, suffix, label }, i) => (
               <motion.div key={label} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 2 + i * 0.15 }} className="text-center">
-                <p className="text-3xl font-display text-ink-900 tracking-wide">
+                <p className="text-xl sm:text-3xl font-display text-ink-900 tracking-wide">
                   <Counter target={target} suffix={suffix} />
                 </p>
-                <p className="text-ink-500 text-xs mt-1 uppercase tracking-wide">{label}</p>
+                <p className="text-ink-500 text-[10px] sm:text-xs mt-1 uppercase tracking-wide">{label}</p>
               </motion.div>
             ))}
           </div>
@@ -221,7 +221,7 @@ const HomePage = () => {
               View all <ChevronRight size={16} />
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
             {featured.map((item, i) => (
               <motion.div key={item._id} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
