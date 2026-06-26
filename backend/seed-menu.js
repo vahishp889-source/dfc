@@ -234,7 +234,7 @@ const getMenuItems = (rid) => [
   { name: 'Capsicum Chicken',          price: 240, category: 'Starters', isVeg: false, imageUrl: IMG.chickenStarter },
   { name: 'Chicken Manchurian',        price: 230, category: 'Starters', isVeg: false, imageUrl: IMG.chickenStarter },
   { name: 'Chilli Chicken',           price: 230, category: 'Starters', isVeg: false, imageUrl: IMG.chickenStarter, isBestSeller: true },
-  { name: 'Chicken 65',               price: 230, category: 'Starters', isVeg: false, imageUrl: IMG.chickenStarter, isBestSeller: true, isFeatured: true },
+  { name: 'Chicken 65',               price: 230, category: 'Starters', isVeg: false, imageUrl: '/chicken-65.png', isBestSeller: true, isFeatured: true },
   { name: 'Chicken Boneless Pakoda',   price: 250, category: 'Starters', isVeg: false, imageUrl: IMG.chickenStarter },
   { name: 'Schezwan Chicken',          price: 260, category: 'Starters', isVeg: false, imageUrl: IMG.chickenStarter },
   { name: 'Butter Garlic Chicken',     price: 270, category: 'Starters', isVeg: false, imageUrl: IMG.chickenStarter },
