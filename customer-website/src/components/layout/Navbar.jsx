@@ -40,7 +40,7 @@ const Navbar = () => {
           {/* Logo — official DFC mark */}
           <Link to="/" className="flex items-center gap-2.5 group select-none">
             <img src={dfcLogo} alt="DFC — Devi Food Court" className="w-9 h-9 object-contain drop-shadow-sm" />
-            <span className="font-display text-lg tracking-wider text-ink-900 font-bold uppercase hidden sm:inline">
+            <span className="font-display text-lg tracking-wider text-black font-bold uppercase hidden sm:inline nav-brand">
               Devi Food Court
             </span>
           </Link>
@@ -51,7 +51,7 @@ const Navbar = () => {
               <NavLink key={to} to={to} end={to === '/'}
                 className={({ isActive }) =>
                   `relative px-4 py-2 rounded-full text-sm font-semibold transition-all duration-150
-                  ${isActive ? 'bg-brand-50' : 'text-ink-600 hover:text-ink-900 hover:bg-ink-900/[0.03]'}`
+                  ${isActive ? 'bg-brand-50' : 'text-stone-700 hover:text-black hover:bg-black/[0.05]'}`
                 }
                 style={({ isActive }) => isActive ? { color: '#ff5a00' } : {}}>
                 {label}
@@ -68,7 +68,8 @@ const Navbar = () => {
           {/* Cart + mobile trigger */}
           <div className="flex items-center gap-3">
             <button onClick={openCart}
-              className="relative p-2.5 rounded-full bg-ink-900/[0.04] hover:bg-ink-900/[0.07] text-ink-900 transition-all border border-ink-900/[0.06]">
+              className="relative p-2.5 rounded-full bg-black/[0.05] hover:bg-black/[0.08] text-black transition-all border border-black/[0.08]"
+              aria-label="Shopping Cart">
               <ShoppingCart size={19} />
               {count > 0 && (
                 <motion.span key={count}
@@ -80,7 +81,8 @@ const Navbar = () => {
               )}
             </button>
             <button onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 rounded-full hover:bg-ink-900/[0.05] text-ink-900 transition-all">
+              className="md:hidden p-2 rounded-full hover:bg-black/[0.05] text-black transition-all"
+              aria-label="Toggle Menu">
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
@@ -100,7 +102,7 @@ const Navbar = () => {
                 <NavLink key={to} to={to} end={to === '/'}
                   className={({ isActive }) =>
                     `relative block px-4 py-3 rounded-xl text-base font-semibold transition-all
-                    ${isActive ? 'bg-brand-50' : 'text-ink-700 hover:bg-ink-900/[0.03] hover:text-ink-900'}`
+                    ${isActive ? 'bg-brand-50' : 'text-stone-700 hover:bg-black/[0.03] hover:text-black'}`
                   }
                   style={({ isActive }) => isActive ? { color: '#ff5a00' } : {}}>
                   <span className="flex items-center gap-2">
