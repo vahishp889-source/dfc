@@ -211,7 +211,7 @@ const HomePage = () => {
               <div className="flex flex-wrap items-center gap-3">
                 <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5 }} className="flex-shrink-0">
-                  <img src={dfcLogo} alt="DFC Logo" className="w-12 h-12 object-contain animate-logo-breathe" />
+                  <img src={dfcLogo} alt="DFC Logo" className="w-20 h-20 object-contain animate-logo-breathe" />
                 </motion.div>
                 
                 {isOpen !== null && (
