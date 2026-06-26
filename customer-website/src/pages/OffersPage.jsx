@@ -3,13 +3,60 @@ import { motion } from 'framer-motion';
 import { Tag, Gift, Zap, Copy, Check } from 'lucide-react';
 import { getOffers } from '../services/api';
 import toast from 'react-hot-toast';
-import teluguMuggu from '../assets/telugu-muggu.png';
+import menuDoodleBg from '../assets/menu-doodle-bg.png';
+import floatingVeggies from '../assets/floating-veggies.png';
+
+// ── Canvas-based Black Background Remover ────────────────────────────────────
+const TransparentImage = ({ src, alt, className, style, threshold = 22 }) => {
+  const [processedSrc, setProcessedSrc] = useState(src);
+
+  useEffect(() => {
+    if (!src) return;
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = src;
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+
+      try {
+        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imgData.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+
+          const brightness = Math.max(r, g, b);
+
+          if (brightness < threshold) {
+            data[i + 3] = 0; // Make transparent
+          } else if (brightness < threshold + 12) {
+            const factor = (brightness - threshold) / 12;
+            data[i + 3] = Math.round(factor * 255);
+          }
+        }
+
+        ctx.putImageData(imgData, 0, 0);
+        setProcessedSrc(canvas.toDataURL());
+      } catch (err) {
+        console.error('Failed to remove background dynamically:', err);
+      }
+    };
+  }, [src, threshold]);
+
+  return <img src={processedSrc || src} alt={alt} className={className} style={style} />;
+};
 
 const TYPE_CONFIG = {
-  combo:    { icon: Gift, label: 'Combo Deal', grad: 'linear-gradient(135deg, #ea580c, #f97316)' },
-  coupon:   { icon: Tag,  label: 'Coupon',     grad: 'linear-gradient(135deg, #ff5a00, #fb842f)' },
-  promo:    { icon: Zap,  label: 'Promotion',  grad: 'linear-gradient(135deg, #d97706, #fb842f)' },
-  seasonal: { icon: Gift, label: 'Special',    grad: 'linear-gradient(135deg, #9a3412, #c2410c)' },
+  combo: { icon: Gift, label: 'Combo Deal', grad: 'linear-gradient(135deg, #ea580c, #f97316)' },
+  coupon: { icon: Tag, label: 'Coupon', grad: 'linear-gradient(135deg, #ff5a00, #fb842f)' },
+  promo: { icon: Zap, label: 'Promotion', grad: 'linear-gradient(135deg, #d97706, #fb842f)' },
+  seasonal: { icon: Gift, label: 'Special', grad: 'linear-gradient(135deg, #9a3412, #c2410c)' },
 };
 
 const OfferCard = ({ offer }) => {
@@ -28,8 +75,8 @@ const OfferCard = ({ offer }) => {
   const discountLabel = offer.discountType === 'percent'
     ? `${offer.discountValue}% OFF`
     : offer.discountType === 'flat'
-    ? `₹${offer.discountValue} OFF`
-    : 'FREE DELIVERY';
+      ? `₹${offer.discountValue} OFF`
+      : 'FREE DELIVERY';
 
   return (
     <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
@@ -81,24 +128,43 @@ const OffersPage = () => {
   const [filter, setFilter] = useState('all');
 
   useEffect(() => {
-    getOffers().then((d) => setOffers(d.offers)).catch(() => {}).finally(() => setIsLoading(false));
+    getOffers().then((d) => setOffers(d.offers)).catch(() => { }).finally(() => setIsLoading(false));
   }, []);
 
   const types = ['all', ...new Set(offers.map((o) => o.type))];
   const filtered = filter === 'all' ? offers : offers.filter((o) => o.type === filter);
 
   return (
-    <div className="min-h-screen pt-20 pb-24 px-4 bg-cream-50 relative overflow-hidden">
+    <div className="min-h-screen pt-20 pb-24 px-4 relative overflow-hidden"
+      style={{
+        backgroundImage: `url(${menuDoodleBg})`,
+        backgroundRepeat: 'repeat',
+        backgroundSize: '750px',
+        backgroundColor: '#0c0a09'
+      }}>
 
-      {/* Traditional Hand-made Telugu Muggu watermarks in background */}
-      <div className="absolute top-24 left-[-120px] w-[450px] h-[450px] pointer-events-none select-none"
-        style={{ opacity: 0.05, mixBlendMode: 'screen' }}>
-        <img src={teluguMuggu} alt="" className="w-full h-full object-contain animate-[spin_200s_linear_infinite]" />
+      {/* Dark overlay to blend background doodles seamlessly (lighter to make doodles more visible) */}
+      <div className="absolute inset-0 bg-black/42 pointer-events-none" />
+
+      {/* Ambient orange glow blobs behind header and content */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Top-left corner warm orange focus spot */}
+        <div className="absolute w-[900px] h-[900px] top-[-300px] left-[-350px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle at 50% 50%, rgba(255,90,0,0.36) 0%, rgba(255,90,0,0.08) 50%, transparent 70%)',
+            mixBlendMode: 'screen'
+          }} />
+
+        {/* Top-right corner warm orange focus spot */}
+        <div className="absolute w-[900px] h-[900px] top-[-300px] right-[-350px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle at 50% 50%, rgba(255,90,0,0.36) 0%, rgba(255,90,0,0.08) 50%, transparent 70%)',
+            mixBlendMode: 'screen'
+          }} />
       </div>
-      <div className="absolute bottom-20 right-[-150px] w-[500px] h-[500px] pointer-events-none select-none"
-        style={{ opacity: 0.04, mixBlendMode: 'screen' }}>
-        <img src={teluguMuggu} alt="" className="w-full h-full object-contain animate-[spin_250s_linear_infinite_reverse]" />
-      </div>
+
+      {/* Scattered background veggies/ingredients with transparent background */}
+
       <div className="max-w-7xl mx-auto pt-12">
         {/* Hero */}
         <div className="text-center mb-12">

@@ -10,24 +10,71 @@ import { isUnseenCancellation, markOrderStatusSeen } from '../utils/orderNotific
 import useNotificationStore from '../store/notificationStore';
 import toast from 'react-hot-toast';
 import { format } from 'date-fns';
-import teluguMuggu from '../assets/telugu-muggu.png';
+import menuDoodleBg from '../assets/menu-doodle-bg.png';
+import floatingVeggies from '../assets/floating-veggies.png';
+
+// ── Canvas-based Black Background Remover ────────────────────────────────────
+const TransparentImage = ({ src, alt, className, style, threshold = 22 }) => {
+  const [processedSrc, setProcessedSrc] = useState(src);
+
+  useEffect(() => {
+    if (!src) return;
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = src;
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+
+      try {
+        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imgData.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+
+          const brightness = Math.max(r, g, b);
+
+          if (brightness < threshold) {
+            data[i + 3] = 0; // Make transparent
+          } else if (brightness < threshold + 12) {
+            const factor = (brightness - threshold) / 12;
+            data[i + 3] = Math.round(factor * 255);
+          }
+        }
+
+        ctx.putImageData(imgData, 0, 0);
+        setProcessedSrc(canvas.toDataURL());
+      } catch (err) {
+        console.error('Failed to remove background dynamically:', err);
+      }
+    };
+  }, [src, threshold]);
+
+  return <img src={processedSrc || src} alt={alt} className={className} style={style} />;
+};
 
 const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000';
 
 const STATUS_STEPS = [
-  { status: 'pending',   icon: Clock,       label: 'Order Received',   desc: 'We got your order!' },
-  { status: 'confirmed', icon: CheckCircle, label: 'Confirmed',        desc: 'Restaurant confirmed your order' },
-  { status: 'preparing', icon: ChefHat,     label: 'Preparing',        desc: 'Your food is being prepared' },
-  { status: 'ready',     icon: Package,     label: 'Ready for Pickup', desc: 'Food is ready, handing to delivery' },
+  { status: 'pending', icon: Clock, label: 'Order Received', desc: 'We got your order!' },
+  { status: 'confirmed', icon: CheckCircle, label: 'Confirmed', desc: 'Restaurant confirmed your order' },
+  { status: 'preparing', icon: ChefHat, label: 'Preparing', desc: 'Your food is being prepared' },
+  { status: 'ready', icon: Package, label: 'Ready for Pickup', desc: 'Food is ready, handing to delivery' },
   { status: 'out_for_delivery', icon: Bike, label: 'Out for Delivery', desc: 'Your rider is on the way' },
-  { status: 'delivered', icon: Truck,       label: 'Delivered',        desc: 'Enjoy your meal! 🎉' },
+  { status: 'delivered', icon: Truck, label: 'Delivered', desc: 'Enjoy your meal! 🎉' },
 ];
 
 const HISTORY_BADGE = {
-  pending:   'bg-amber-50 text-amber-700 border-amber-200',
+  pending: 'bg-amber-50 text-amber-700 border-amber-200',
   confirmed: 'bg-blue-50 text-blue-700 border-blue-200',
   preparing: 'bg-purple-50 text-purple-700 border-purple-200',
-  ready:     'bg-green-50 text-green-700 border-green-200',
+  ready: 'bg-green-50 text-green-700 border-green-200',
   out_for_delivery: 'bg-brand-50 text-brand-700 border-brand-200',
   delivered: 'bg-ink-100 text-ink-600 border-ink-200',
   cancelled: 'bg-red-50 text-red-600 border-red-200',
@@ -137,17 +184,36 @@ const TrackOrderPage = () => {
     : STATUS_STEPS.findIndex((s) => s.status === order?.status);
 
   return (
-    <div className="min-h-screen pt-20 pb-24 px-4 bg-cream-50 relative overflow-hidden">
+    <div className="min-h-screen pt-20 pb-24 px-4 relative overflow-hidden"
+      style={{
+        backgroundImage: `url(${menuDoodleBg})`,
+        backgroundRepeat: 'repeat',
+        backgroundSize: '750px',
+        backgroundColor: '#0c0a09'
+      }}>
 
-      {/* Traditional Hand-made Telugu Muggu watermarks in background */}
-      <div className="absolute top-24 left-[-120px] w-[450px] h-[450px] pointer-events-none select-none"
-        style={{ opacity: 0.05, mixBlendMode: 'screen' }}>
-        <img src={teluguMuggu} alt="" className="w-full h-full object-contain animate-[spin_200s_linear_infinite]" />
+      {/* Dark overlay to blend background doodles seamlessly (lighter to make doodles more visible) */}
+      <div className="absolute inset-0 bg-black/42 pointer-events-none" />
+
+      {/* Ambient orange glow blobs behind header and content */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Top-left corner warm orange focus spot */}
+        <div className="absolute w-[900px] h-[900px] top-[-300px] left-[-350px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle at 50% 50%, rgba(255,90,0,0.36) 0%, rgba(255,90,0,0.08) 50%, transparent 70%)',
+            mixBlendMode: 'screen'
+          }} />
+
+        {/* Top-right corner warm orange focus spot */}
+        <div className="absolute w-[900px] h-[900px] top-[-300px] right-[-350px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle at 50% 50%, rgba(255,90,0,0.36) 0%, rgba(255,90,0,0.08) 50%, transparent 70%)',
+            mixBlendMode: 'screen'
+          }} />
       </div>
-      <div className="absolute bottom-20 right-[-150px] w-[500px] h-[500px] pointer-events-none select-none"
-        style={{ opacity: 0.04, mixBlendMode: 'screen' }}>
-        <img src={teluguMuggu} alt="" className="w-full h-full object-contain animate-[spin_250s_linear_infinite_reverse]" />
-      </div>
+
+      {/* Scattered background veggies/ingredients with transparent background */}
+
 
       <div className="max-w-2xl mx-auto pt-12">
         <div className="text-center mb-10">
@@ -190,7 +256,7 @@ const TrackOrderPage = () => {
                 <div className={`px-3 py-1.5 rounded-full text-xs font-bold border
                   ${order.status === 'delivered' ? 'bg-green-50 text-green-700 border-green-200' :
                     order.status === 'cancelled' ? 'bg-red-50 text-red-600 border-red-200' :
-                    'bg-orange-50 text-brand-700 border-orange-200 animate-pulse'}`}>
+                      'bg-orange-50 text-brand-700 border-orange-200 animate-pulse'}`}>
                   {order.status.replace(/_/g, ' ').toUpperCase()}
                 </div>
               </div>

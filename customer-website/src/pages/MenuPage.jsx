@@ -21,19 +21,19 @@ const TransparentImage = ({ src, alt, className, style, threshold = 22 }) => {
       canvas.height = img.height;
       const ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0);
-      
+
       try {
         const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         const data = imgData.data;
-        
+
         for (let i = 0; i < data.length; i += 4) {
           const r = data[i];
           const g = data[i + 1];
           const b = data[i + 2];
-          
+
           // Using max color value for brightness
           const brightness = Math.max(r, g, b);
-          
+
           if (brightness < threshold) {
             data[i + 3] = 0; // Make transparent
           } else if (brightness < threshold + 12) {
@@ -42,7 +42,7 @@ const TransparentImage = ({ src, alt, className, style, threshold = 22 }) => {
             data[i + 3] = Math.round(factor * 255);
           }
         }
-        
+
         ctx.putImageData(imgData, 0, 0);
         setProcessedSrc(canvas.toDataURL());
       } catch (err) {
@@ -83,10 +83,10 @@ const MenuPage = () => {
   }, []);
 
   const filtered = useMemo(() => items.filter((item) => {
-    const matchCat    = activeCategory === 'All' || item.category === activeCategory;
+    const matchCat = activeCategory === 'All' || item.category === activeCategory;
     const matchSearch = !search || item.name.toLowerCase().includes(search.toLowerCase()) ||
-                        item.description?.toLowerCase().includes(search.toLowerCase());
-    const matchVeg    = !vegOnly || item.isVeg;
+      item.description?.toLowerCase().includes(search.toLowerCase());
+    const matchVeg = !vegOnly || item.isVeg;
     return matchCat && matchSearch && matchVeg;
   }), [items, activeCategory, search, vegOnly]);
 
@@ -117,7 +117,7 @@ const MenuPage = () => {
             background: 'radial-gradient(circle at 50% 50%, rgba(255,90,0,0.36) 0%, rgba(255,90,0,0.08) 50%, transparent 70%)',
             mixBlendMode: 'screen'
           }} />
-        
+
         {/* Top-right corner warm orange focus spot */}
         <div className="absolute w-[900px] h-[900px] top-[-300px] right-[-350px] rounded-full"
           style={{
@@ -131,7 +131,7 @@ const MenuPage = () => {
             background: 'radial-gradient(circle at 50% 50%, rgba(255,90,0,0.22) 0%, transparent 70%)',
             mixBlendMode: 'screen'
           }} />
-        
+
         {/* Right edge warm orange focus spot (lower page) */}
         <div className="absolute w-[900px] h-[900px] top-[50%] right-[-450px] rounded-full"
           style={{
@@ -140,21 +140,7 @@ const MenuPage = () => {
           }} />
       </div>
 
-      {/* Scattered background veggies/ingredients with transparent background */}
-      <div className="absolute top-[18%] left-[-60px] w-[190px] h-[190px] pointer-events-none select-none z-10"
-        style={{ transform: 'rotate(-25deg)', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.5))' }}>
-        <TransparentImage src={floatingVeggies} alt="" className="w-full h-full object-contain" threshold={20} />
-      </div>
 
-      <div className="absolute top-[48%] right-[-60px] w-[210px] h-[210px] pointer-events-none select-none z-10"
-        style={{ transform: 'rotate(40deg)', filter: 'drop-shadow(0 10px 25px rgba(0,0,0,0.65))' }}>
-        <TransparentImage src={floatingVeggies} alt="" className="w-full h-full object-contain" threshold={20} />
-      </div>
-
-      <div className="absolute bottom-[10%] left-[-50px] w-[160px] h-[160px] pointer-events-none select-none z-10"
-        style={{ transform: 'rotate(15deg)', filter: 'drop-shadow(0 10px 18px rgba(0,0,0,0.5))' }}>
-        <TransparentImage src={floatingVeggies} alt="" className="w-full h-full object-contain" threshold={20} />
-      </div>
 
       {/* Hero */}
       <div className="relative overflow-hidden py-14 px-4 bg-transparent">

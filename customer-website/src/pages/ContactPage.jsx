@@ -1,7 +1,55 @@
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock, Instagram, Facebook, MessageCircle } from 'lucide-react';
 import useSettingsStore from '../store/settingsStore';
-import teluguMuggu from '../assets/telugu-muggu.png';
+import menuDoodleBg from '../assets/menu-doodle-bg.png';
+import floatingVeggies from '../assets/floating-veggies.png';
+import { useEffect, useState } from 'react';
+
+// ── Canvas-based Black Background Remover ────────────────────────────────────
+const TransparentImage = ({ src, alt, className, style, threshold = 22 }) => {
+  const [processedSrc, setProcessedSrc] = useState(src);
+
+  useEffect(() => {
+    if (!src) return;
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = src;
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+
+      try {
+        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imgData.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+
+          const brightness = Math.max(r, g, b);
+
+          if (brightness < threshold) {
+            data[i + 3] = 0; // Make transparent
+          } else if (brightness < threshold + 12) {
+            const factor = (brightness - threshold) / 12;
+            data[i + 3] = Math.round(factor * 255);
+          }
+        }
+
+        ctx.putImageData(imgData, 0, 0);
+        setProcessedSrc(canvas.toDataURL());
+      } catch (err) {
+        console.error('Failed to remove background dynamically:', err);
+      }
+    };
+  }, [src, threshold]);
+
+  return <img src={processedSrc || src} alt={alt} className={className} style={style} />;
+};
 
 const ContactPage = () => {
   const { settings, restaurant } = useSettingsStore();
@@ -11,52 +59,77 @@ const ContactPage = () => {
   const whatsapp = settings?.socialLinks?.whatsapp || phone;
   const isOpen = settings?.isOpen ?? true;
   const instagramHref = settings?.socialLinks?.instagram || '#';
-  const facebookHref  = settings?.socialLinks?.facebook  || '#';
+  const facebookHref = settings?.socialLinks?.facebook || '#';
 
   const CONTACT_CARDS = [
-    { icon: Phone, title: 'Call Us', value: phone, sub: 'Available during business hours',
-      href: `tel:${phone.replace(/\s/g, '')}`, cta: 'Call Now', grad: 'linear-gradient(135deg, #b91c1c, #d97706)' },
-    { icon: MessageCircle, title: 'WhatsApp', value: whatsapp, sub: 'Quick responses on WhatsApp',
-      href: `https://wa.me/${whatsapp.replace(/[^\d]/g, '')}`, cta: 'Chat Now', grad: 'linear-gradient(135deg, #166534, #15803d)' },
-    { icon: Mail, title: 'Email Us', value: email, sub: 'We reply within 24 hours',
-      href: `mailto:${email}`, cta: 'Send Email', grad: 'linear-gradient(135deg, #d97706, #fb842f)' },
+    {
+      icon: Phone, title: 'Call Us', value: phone, sub: 'Available during business hours',
+      href: `tel:${phone.replace(/\s/g, '')}`, cta: 'Call Now', grad: 'linear-gradient(135deg, #b91c1c, #d97706)'
+    },
+    {
+      icon: MessageCircle, title: 'WhatsApp', value: whatsapp, sub: 'Quick responses on WhatsApp',
+      href: `https://wa.me/${whatsapp.replace(/[^\d]/g, '')}`, cta: 'Chat Now', grad: 'linear-gradient(135deg, #166534, #15803d)'
+    },
+    {
+      icon: Mail, title: 'Email Us', value: email, sub: 'We reply within 24 hours',
+      href: `mailto:${email}`, cta: 'Send Email', grad: 'linear-gradient(135deg, #d97706, #fb842f)'
+    },
   ];
 
   // Build opening hours from settings or fall back to defaults
   const DAY_GROUPS = [
-    { label: 'Monday – Friday', keys: ['monday','tuesday','wednesday','thursday','friday'] },
+    { label: 'Monday – Friday', keys: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'] },
     { label: 'Saturday', keys: ['saturday'] },
     { label: 'Sunday', keys: ['sunday'] },
   ];
   const HOURS = (settings?.openingHours && settings.openingHours.length > 0)
     ? DAY_GROUPS.map(({ label, keys }) => {
-        const entry = settings.openingHours.find((h) => keys.includes(h.day));
-        if (!entry) return null;
-        if (entry.isClosed) return { days: label, time: 'Closed' };
-        const fmt = (t) => {
-          const [h, m] = t.split(':').map(Number);
-          const ampm = h >= 12 ? 'PM' : 'AM';
-          return `${((h % 12) || 12)}:${String(m).padStart(2,'0')} ${ampm}`;
-        };
-        return { days: label, time: `${fmt(entry.open)} – ${fmt(entry.close)}` };
-      }).filter(Boolean)
+      const entry = settings.openingHours.find((h) => keys.includes(h.day));
+      if (!entry) return null;
+      if (entry.isClosed) return { days: label, time: 'Closed' };
+      const fmt = (t) => {
+        const [h, m] = t.split(':').map(Number);
+        const ampm = h >= 12 ? 'PM' : 'AM';
+        return `${((h % 12) || 12)}:${String(m).padStart(2, '0')} ${ampm}`;
+      };
+      return { days: label, time: `${fmt(entry.open)} – ${fmt(entry.close)}` };
+    }).filter(Boolean)
     : [
-        { days: 'Monday – Friday', time: '10:00 AM – 10:00 PM' },
-        { days: 'Saturday', time: '10:00 AM – 11:00 PM' },
-        { days: 'Sunday', time: '10:00 AM – 11:00 PM' },
-      ];
+      { days: 'Monday – Friday', time: '10:00 AM – 10:00 PM' },
+      { days: 'Saturday', time: '10:00 AM – 11:00 PM' },
+      { days: 'Sunday', time: '10:00 AM – 11:00 PM' },
+    ];
   return (
-    <div className="min-h-screen pt-20 pb-24 px-4 bg-cream-50 relative overflow-hidden">
+    <div className="min-h-screen pt-20 pb-24 px-4 relative overflow-hidden"
+      style={{
+        backgroundImage: `url(${menuDoodleBg})`,
+        backgroundRepeat: 'repeat',
+        backgroundSize: '750px',
+        backgroundColor: '#0c0a09'
+      }}>
 
-      {/* Traditional Hand-made Telugu Muggu watermarks in background */}
-      <div className="absolute top-24 left-[-120px] w-[450px] h-[450px] pointer-events-none select-none"
-        style={{ opacity: 0.05, mixBlendMode: 'screen' }}>
-        <img src={teluguMuggu} alt="" className="w-full h-full object-contain animate-[spin_200s_linear_infinite]" />
+      {/* Dark overlay to blend background doodles seamlessly (lighter to make doodles more visible) */}
+      <div className="absolute inset-0 bg-black/42 pointer-events-none" />
+
+      {/* Ambient orange glow blobs behind header and content */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Top-left corner warm orange focus spot */}
+        <div className="absolute w-[900px] h-[900px] top-[-300px] left-[-350px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle at 50% 50%, rgba(255,90,0,0.36) 0%, rgba(255,90,0,0.08) 50%, transparent 70%)',
+            mixBlendMode: 'screen'
+          }} />
+
+        {/* Top-right corner warm orange focus spot */}
+        <div className="absolute w-[900px] h-[900px] top-[-300px] right-[-350px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle at 50% 50%, rgba(255,90,0,0.36) 0%, rgba(255,90,0,0.08) 50%, transparent 70%)',
+            mixBlendMode: 'screen'
+          }} />
       </div>
-      <div className="absolute bottom-20 right-[-150px] w-[500px] h-[500px] pointer-events-none select-none"
-        style={{ opacity: 0.04, mixBlendMode: 'screen' }}>
-        <img src={teluguMuggu} alt="" className="w-full h-full object-contain animate-[spin_250s_linear_infinite_reverse]" />
-      </div>
+
+      {/* Scattered background veggies/ingredients with transparent background */}
+
       <div className="max-w-6xl mx-auto pt-12">
 
         {/* Header */}
@@ -143,7 +216,7 @@ const ContactPage = () => {
               <div className="flex gap-3">
                 {[
                   { icon: Instagram, label: 'Instagram', href: instagramHref, color: '#b91c1c' },
-                  { icon: Facebook,  label: 'Facebook',  href: facebookHref,  color: '#15803d' },
+                  { icon: Facebook, label: 'Facebook', href: facebookHref, color: '#15803d' },
                 ].map(({ icon: Icon, label, href, color }) => (
                   <a key={label} href={href} target="_blank" rel="noreferrer"
                     className="flex items-center gap-2 bg-cream-100 border border-ink-900/[0.06] rounded-xl px-4 py-2.5 text-ink-600 text-sm font-medium transition-all hover:text-white"
