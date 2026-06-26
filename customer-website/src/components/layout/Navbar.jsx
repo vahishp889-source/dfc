@@ -40,8 +40,8 @@ const Navbar = () => {
           {/* Logo — official DFC mark */}
           <Link to="/" className="flex items-center gap-2.5 group select-none">
             <img src={dfcLogo} alt="DFC — Devi Food Court" className="w-9 h-9 object-contain drop-shadow-sm" />
-            <span className="font-display text-xl tracking-wide text-ink-900 hidden sm:inline">
-              
+            <span className="font-display text-lg tracking-wider text-ink-900 font-bold uppercase hidden sm:inline">
+              Devi Food Court
             </span>
           </Link>
 
@@ -53,12 +53,12 @@ const Navbar = () => {
                   `relative px-4 py-2 rounded-full text-sm font-semibold transition-all duration-150
                   ${isActive ? 'bg-brand-50' : 'text-ink-600 hover:text-ink-900 hover:bg-ink-900/[0.03]'}`
                 }
-                style={({ isActive }) => isActive ? { color: '#b91c1c' } : {}}>
+                style={({ isActive }) => isActive ? { color: '#ff5a00' } : {}}>
                 {label}
                 {to === '/track' && hasNotification && (
                   <span className="absolute top-1 right-1.5 flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-500 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-500" />
                   </span>
                 )}
               </NavLink>
@@ -74,7 +74,7 @@ const Navbar = () => {
                 <motion.span key={count}
                   initial={{ scale: 0 }} animate={{ scale: 1 }}
                   className="absolute -top-1 -right-1 w-5 h-5 text-white text-xs font-bold rounded-full flex items-center justify-center animate-cart-bounce"
-                  style={{ background: 'linear-gradient(135deg, #b91c1c, #d97706)' }}>
+                  style={{ background: 'linear-gradient(135deg, #ff5a00, #ea580c)' }}>
                   {count > 9 ? '9+' : count}
                 </motion.span>
               )}
@@ -102,11 +102,11 @@ const Navbar = () => {
                     `relative block px-4 py-3 rounded-xl text-base font-semibold transition-all
                     ${isActive ? 'bg-brand-50' : 'text-ink-700 hover:bg-ink-900/[0.03] hover:text-ink-900'}`
                   }
-                  style={({ isActive }) => isActive ? { color: '#b91c1c' } : {}}>
+                  style={({ isActive }) => isActive ? { color: '#ff5a00' } : {}}>
                   <span className="flex items-center gap-2">
                     {label}
                     {to === '/track' && hasNotification && (
-                      <span className="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+                      <span className="bg-brand-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
                         {unseenCancelledOrders.length}
                       </span>
                     )}

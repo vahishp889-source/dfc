@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock, Instagram, Facebook, MessageCircle } from 'lucide-react';
 import useSettingsStore from '../store/settingsStore';
+import teluguMuggu from '../assets/telugu-muggu.png';
 
 const ContactPage = () => {
   const { settings, restaurant } = useSettingsStore();
@@ -45,7 +46,17 @@ const ContactPage = () => {
         { days: 'Sunday', time: '10:00 AM – 11:00 PM' },
       ];
   return (
-    <div className="min-h-screen pt-20 pb-24 px-4 bg-cream-50">
+    <div className="min-h-screen pt-20 pb-24 px-4 bg-cream-50 relative overflow-hidden">
+
+      {/* Traditional Hand-made Telugu Muggu watermarks in background */}
+      <div className="absolute top-24 left-[-120px] w-[450px] h-[450px] pointer-events-none select-none"
+        style={{ opacity: 0.05, mixBlendMode: 'screen' }}>
+        <img src={teluguMuggu} alt="" className="w-full h-full object-contain animate-[spin_200s_linear_infinite]" />
+      </div>
+      <div className="absolute bottom-20 right-[-150px] w-[500px] h-[500px] pointer-events-none select-none"
+        style={{ opacity: 0.04, mixBlendMode: 'screen' }}>
+        <img src={teluguMuggu} alt="" className="w-full h-full object-contain animate-[spin_250s_linear_infinite_reverse]" />
+      </div>
       <div className="max-w-6xl mx-auto pt-12">
 
         {/* Header */}

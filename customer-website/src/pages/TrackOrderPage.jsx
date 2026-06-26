@@ -10,6 +10,7 @@ import { isUnseenCancellation, markOrderStatusSeen } from '../utils/orderNotific
 import useNotificationStore from '../store/notificationStore';
 import toast from 'react-hot-toast';
 import { format } from 'date-fns';
+import teluguMuggu from '../assets/telugu-muggu.png';
 
 const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000';
 
@@ -136,7 +137,18 @@ const TrackOrderPage = () => {
     : STATUS_STEPS.findIndex((s) => s.status === order?.status);
 
   return (
-    <div className="min-h-screen pt-20 pb-24 px-4 bg-cream-50">
+    <div className="min-h-screen pt-20 pb-24 px-4 bg-cream-50 relative overflow-hidden">
+
+      {/* Traditional Hand-made Telugu Muggu watermarks in background */}
+      <div className="absolute top-24 left-[-120px] w-[450px] h-[450px] pointer-events-none select-none"
+        style={{ opacity: 0.05, mixBlendMode: 'screen' }}>
+        <img src={teluguMuggu} alt="" className="w-full h-full object-contain animate-[spin_200s_linear_infinite]" />
+      </div>
+      <div className="absolute bottom-20 right-[-150px] w-[500px] h-[500px] pointer-events-none select-none"
+        style={{ opacity: 0.04, mixBlendMode: 'screen' }}>
+        <img src={teluguMuggu} alt="" className="w-full h-full object-contain animate-[spin_250s_linear_infinite_reverse]" />
+      </div>
+
       <div className="max-w-2xl mx-auto pt-12">
         <div className="text-center mb-10">
           <h1 className="section-heading text-4xl mb-3">Track <span className="gradient-text">Order</span></h1>

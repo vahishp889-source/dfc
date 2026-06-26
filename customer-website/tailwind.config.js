@@ -4,22 +4,40 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Brand palette - Classical Golden Amber / Ochre
+        // Brand palette - Vibrant Premium Orange (matching the mockup)
         brand: {
-          50: '#fffbeb', 100: '#fef3c7', 200: '#fde68a',
-          300: '#fcd34d', 400: '#fbbf24', 500: '#d97706',
-          600: '#b45309', 700: '#92400e', 800: '#78350f', 900: '#451a03',
+          50: 'rgba(255, 90, 0, 0.05)',
+          100: 'rgba(255, 90, 0, 0.1)',
+          200: 'rgba(255, 90, 0, 0.2)',
+          300: 'rgba(255, 90, 0, 0.35)',
+          400: 'rgba(255, 90, 0, 0.5)',
+          500: '#ff5a00',
+          600: '#ea580c',
+          700: '#c2410c',
+          800: '#9a3412',
+          900: '#7c2d12',
         },
         red: {
           50: '#fef2f2', 100: '#fee2e2', 200: '#fecaca', 300: '#fca5a5',
-          400: '#f87171', 500: '#b91c1c', 600: '#991b1b', 700: '#7f1d1d', 800: '#450a0a', 900: '#330404',
+          400: '#f87171', 500: '#ef4444', 600: '#dc2626', 700: '#b91c1c', 800: '#991b1b', 900: '#7f1d1d',
         },
         green: {
           50: '#f0fdf4', 100: '#dcfce7', 200: '#bbf7d0', 300: '#86efac',
-          400: '#4ade80', 500: '#15803d', 600: '#166534', 700: '#14532d', 800: '#114022', 900: '#0d3019',
+          400: '#4ade80', 500: '#22c55e', 600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d',
         },
-        ink: { 950: '#0c0a09', 900: '#1c1917', 800: '#292524', 700: '#44403c', 600: '#57534e', 500: '#78716c' },
-        cream: { 50: '#faf8f5', 100: '#f4ede2', 200: '#e9decb' },
+        ink: {
+          950: '#ffffff',
+          900: '#faf8f6', // primary text color on dark
+          800: '#e5e1db', // secondary text
+          700: '#ccc7be',
+          600: '#a8a299',
+          500: '#7e786f',
+        },
+        cream: {
+          50: '#0c0a09', // primary dark page background
+          100: '#161413', // secondary dark/card background
+          200: '#221e1c',
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

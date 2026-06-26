@@ -3,12 +3,13 @@ import { motion } from 'framer-motion';
 import { Tag, Gift, Zap, Copy, Check } from 'lucide-react';
 import { getOffers } from '../services/api';
 import toast from 'react-hot-toast';
+import teluguMuggu from '../assets/telugu-muggu.png';
 
 const TYPE_CONFIG = {
-  combo:    { icon: Gift, label: 'Combo Deal', grad: 'linear-gradient(135deg, #15803d, #79bd49)' },
-  coupon:   { icon: Tag,  label: 'Coupon',     grad: 'linear-gradient(135deg, #b91c1c, #d97706)' },
+  combo:    { icon: Gift, label: 'Combo Deal', grad: 'linear-gradient(135deg, #ea580c, #f97316)' },
+  coupon:   { icon: Tag,  label: 'Coupon',     grad: 'linear-gradient(135deg, #ff5a00, #fb842f)' },
   promo:    { icon: Zap,  label: 'Promotion',  grad: 'linear-gradient(135deg, #d97706, #fb842f)' },
-  seasonal: { icon: Gift, label: 'Special',    grad: 'linear-gradient(135deg, #b91c1c, #ec474a)' },
+  seasonal: { icon: Gift, label: 'Special',    grad: 'linear-gradient(135deg, #9a3412, #c2410c)' },
 };
 
 const OfferCard = ({ offer }) => {
@@ -87,15 +88,25 @@ const OffersPage = () => {
   const filtered = filter === 'all' ? offers : offers.filter((o) => o.type === filter);
 
   return (
-    <div className="min-h-screen pt-20 pb-24 px-4 bg-cream-50">
+    <div className="min-h-screen pt-20 pb-24 px-4 bg-cream-50 relative overflow-hidden">
+
+      {/* Traditional Hand-made Telugu Muggu watermarks in background */}
+      <div className="absolute top-24 left-[-120px] w-[450px] h-[450px] pointer-events-none select-none"
+        style={{ opacity: 0.05, mixBlendMode: 'screen' }}>
+        <img src={teluguMuggu} alt="" className="w-full h-full object-contain animate-[spin_200s_linear_infinite]" />
+      </div>
+      <div className="absolute bottom-20 right-[-150px] w-[500px] h-[500px] pointer-events-none select-none"
+        style={{ opacity: 0.04, mixBlendMode: 'screen' }}>
+        <img src={teluguMuggu} alt="" className="w-full h-full object-contain animate-[spin_250s_linear_infinite_reverse]" />
+      </div>
       <div className="max-w-7xl mx-auto pt-12">
         {/* Hero */}
         <div className="text-center mb-12">
           <span className="inline-flex items-center gap-2 text-sm font-semibold px-4 py-1.5 rounded-full mb-5"
-            style={{ background: 'rgba(217,119,6,0.08)', border: '1px solid rgba(217,119,6,0.25)', color: '#dd5e06' }}>
+            style={{ background: 'rgba(255,90,0,0.08)', border: '1px solid rgba(255,90,0,0.25)', color: '#ff5a00' }}>
             <Zap size={14} /> Exclusive Deals
           </span>
-          <h1 className="section-heading text-4xl md:text-5xl mb-4">Today's <span className="gradient-text">Offers</span></h1>
+          <h1 className="section-heading text-4xl md:text-5xl mb-4 text-white">Today's <span className="gradient-text">Offers</span></h1>
           <p className="section-sub mx-auto text-center">
             Use these codes at checkout to save big on your next order
           </p>

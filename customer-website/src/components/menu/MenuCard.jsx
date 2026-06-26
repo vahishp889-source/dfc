@@ -32,8 +32,9 @@ const MenuCard = ({ item, cartRef }) => {
   return (
     <motion.div layout initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
       className={`group relative rounded-2xl overflow-hidden flex flex-col card-hover bg-white border shadow-soft
-        ${soldOut ? 'border-ink-900/[0.06] opacity-75' : 'border-ink-900/[0.06]'}`}
-      whileHover={soldOut ? {} : { boxShadow: '0 12px 32px rgba(185,28,28,0.12)', borderColor: 'rgba(185,28,28,0.18)' }}
+        ${soldOut ? 'opacity-75' : ''}`}
+      style={{ borderColor: 'rgba(255, 90, 0, 0.12)' }}
+      whileHover={soldOut ? {} : { boxShadow: '0 12px 32px rgba(255,90,0,0.18)', borderColor: 'rgba(255,90,0,0.45)' }}
     >
       {/* Image */}
       <div className="relative aspect-[4/3] overflow-hidden bg-cream-100">
@@ -69,17 +70,17 @@ const MenuCard = ({ item, cartRef }) => {
           <div className="absolute top-2.5 right-2.5 flex flex-col gap-1.5 items-end">
             {item.isBestSeller && (
               <span className="text-xs font-bold px-2 py-0.5 rounded-full text-white shadow-sm"
-                style={{ background: 'linear-gradient(135deg, #d97706, #fb842f)' }}>⭐ Best</span>
+                style={{ background: 'linear-gradient(135deg, #ff5a00, #fb842f)' }}>⭐ Best</span>
             )}
             {discount > 0 && (
               <span className="text-xs font-bold px-2 py-0.5 rounded-full text-white shadow-sm"
-                style={{ background: 'linear-gradient(135deg, #b91c1c, #ec474a)' }}>{discount}% OFF</span>
+                style={{ background: 'linear-gradient(135deg, #ea580c, #ec474a)' }}>{discount}% OFF</span>
             )}
           </div>
         )}
 
         {!soldOut && SPICE_ICONS[item.spiceLevel] && (
-          <div className="absolute bottom-2.5 left-2.5 text-sm bg-white/90 rounded-full px-1.5 py-0.5 shadow-sm">{SPICE_ICONS[item.spiceLevel]}</div>
+          <div className="absolute bottom-2.5 left-2.5 text-sm bg-[#161413]/90 rounded-full px-1.5 py-0.5 shadow-sm">{SPICE_ICONS[item.spiceLevel]}</div>
         )}
       </div>
 
@@ -111,11 +112,11 @@ const MenuCard = ({ item, cartRef }) => {
           ) : qty === 0 ? (
             <button onClick={handleAdd} disabled={isAdding}
               className="flex items-center gap-1 text-xs sm:text-sm font-bold px-3 py-1.5 sm:px-4 sm:py-1.5 rounded-full transition-all active:scale-95 disabled:opacity-60 text-white"
-              style={{ background: 'linear-gradient(135deg, #b91c1c, #d97706)', boxShadow: '0 4px 14px rgba(185,28,28,0.25)' }}>
+              style={{ background: 'linear-gradient(135deg, #ff5a00, #ea580c)', boxShadow: '0 4px 14px rgba(255,90,0,0.25)' }}>
               <Plus size={13} /> Add
             </button>
           ) : (
-            <div className="flex items-center gap-0.5 sm:gap-1 rounded-full p-0.5 sm:p-1 bg-orange-50 border border-orange-200">
+            <div className="flex items-center gap-0.5 sm:gap-1 rounded-full p-0.5 sm:p-1 bg-cream-200 border border-white/10">
               <button onClick={() => updateQty(item._id, qty - 1)}
                 className="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center transition-all text-ink-700 hover:bg-white">
                 <Minus size={10} />
@@ -123,7 +124,7 @@ const MenuCard = ({ item, cartRef }) => {
               <span className="text-ink-900 font-bold text-xs sm:text-sm w-4 sm:w-5 text-center">{qty}</span>
               <button onClick={handleAdd}
                 className="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center transition-all text-white active:scale-95"
-                style={{ background: 'linear-gradient(135deg, #b91c1c, #d97706)' }}>
+                style={{ background: 'linear-gradient(135deg, #ff5a00, #ea580c)' }}>
                 <Plus size={10} />
               </button>
             </div>
